@@ -2,5 +2,8 @@
 
 # Home Controller
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @items = Item.new
+    @item = Item.all
+  end
 end

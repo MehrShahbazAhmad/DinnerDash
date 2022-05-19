@@ -1,0 +1,31 @@
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Show</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @item.each do |item| %>
+        <tr>
+          <td><%= item.title %></td>
+          <td><%= item.description %></td>
+          <td><%= item.price %></td>
+          <td><%= item.status %></td>
+          <td><%= link_to 'Show Item', item_path(item), class:"btn btn-dark" %></td>
+          <td><%= link_to 'Edit Item', edit_item_path(item), class:"btn btn-dark" %></td>
+          <td><%= link_to 'Delete Item', item, method: :delete,
+          data: { confirm: 'Are you sure?' } , class:"btn btn-dark" %></td>
+        </tr>
+      <% end %>
+  </tbody>
+  </table>
+
+  <%= link_to 'New Item', new_item_path, class:"btn btn-dark"%>
+</div>

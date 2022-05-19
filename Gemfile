@@ -33,6 +33,9 @@ gem 'bootstrap', '~> 5.1.3'
 
 gem 'jquery-rails'
 
+gem 'cloudinary', require: false
+gem 'activestorage-cloudinary-service'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
