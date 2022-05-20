@@ -1,5 +1,9 @@
 class Item < ApplicationRecord
   has_many_attached :images
+
+  has_many :restaurant_items
+  has_many :restaurants, through: :restaurant_items
+
   enum status: {active: 0, closed: 1}
 
   validates :title, presence: true, uniqueness: true
