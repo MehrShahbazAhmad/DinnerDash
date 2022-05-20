@@ -36,6 +36,8 @@ gem 'jquery-rails'
 gem 'cloudinary', require: false
 gem 'activestorage-cloudinary-service'
 
+gem  'annotate'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
