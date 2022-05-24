@@ -1,19 +1,17 @@
-<div class="container text-center">
-  <div >
-      <% @item.images.each do |x| %>
-      <%= image_tag x, size: '450x400'%>
-      <br><br><br><br><br>
-    <% end %>
-  </div>
-  <div>
-
+<div class="container">
     <div class="card" style="width: 18rem;">
-      <%= image_tag @item.images.first %>
+      <% if @item.images.present? %>
+        <%= image_tag(@item.images.first, alt: "Edit Entry", class: "Card image cap") %>
+      <% else %>
+        <%= image_tag('defult.jpeg', alt: "Edit Entry", class: "Card image cap", size: "200") %>
+      <% end %>
       <div class="card-body">
         <h5 class="card-title"><%= @item.title %></h5>
+        <p class="card-text">$ <%= @item.price %></p>
         <p class="card-text"><%= @item.description %></p>
         <a href="#" class="btn btn-dark">Add to Cart</a>
       </div>
     </div>
   </div>
+  <%= link_to 'Back', restaurant_path(@restaurant), class:"btn btn-dark"%>
 </div>

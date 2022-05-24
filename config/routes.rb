@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     resources :items
   end
 
-  resources :items
   get 'home/index'
-  root 'home#index'
+  root 'items#index'
 end

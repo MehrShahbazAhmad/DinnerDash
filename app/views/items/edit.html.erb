@@ -1,8 +1,5 @@
 <div class="container">
-  <h1>Editing Item</h1>
-
-  <%= render 'form', item: @item %>
-
-  <%= link_to 'Back', item_path , class:"btn btn-secondary" %>
-
+  <h1>Editing Item for '<%= @restaurant.title %>'</h1>
+  <%= render 'form', restaurant: @restaurant %>
+  <%= link_to 'Back', restaurant_path(@restaurant), class:"btn btn-dark"%>
 </div>

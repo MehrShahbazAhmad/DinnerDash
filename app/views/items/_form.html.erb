@@ -1,13 +1,13 @@
-<%= form_with(model: @item, local: true) do |form| %>
+<%= form_with(model: [restaurant, @item ], local: true) do |form| %>
 
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2>
-        <%= pluralize( @item.errors.count, "error" ) %> prohibited this  Item from being saved:
+        <%= pluralize( @item.errors.count, "error" ) %> prohibited this Item from being saved:
       </h2>
 
       <ul>
-        <%   @item.errors.full_messages.each do |message| %>
+        <% @item.errors.full_messages.each do |message| %>
           <li>
             <%= message %>
           </li>
@@ -39,7 +39,11 @@
   </div>
 
   <div class="actions">
-    <%= form.submit class:"btn btn-dark " %>
+    <% if @item.new_record? %>
+      <%= form.submit 'Create Item', class:"btn btn-dark " %>
+    <% else %>
+      <%= form.submit 'Update Item', class:"btn btn-dark " %>
+    <% end %>
   </div>
 
 <% end %>

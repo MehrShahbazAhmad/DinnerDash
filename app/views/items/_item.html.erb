@@ -1,0 +1,25 @@
+<% if item.active? %>
+  <div class="col-sm">
+    <div class="card" style="width: 18rem;">
+      <% if item.images.present? %>
+        <%= image_tag(item.images.first, alt: "Edit Entry", class: "Card image cap", size: "287x200") %>
+      <% else %>
+        <%= image_tag('defult.jpeg', alt: "Edit Entry", class: "Card image cap", size: "287x200") %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= item.title %></h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">$ <%= item.price %></li>
+        <li class="list-group-item"><%= item.description %></li>
+        <li class="list-group-item"><%= item.restaurants.first.title %></li>
+        <li class="list-group-item">Categeries</li>
+        <li class="list-group-item">Categeries-types</li>
+      </ul>
+      <div class="card-body">
+        <%= link_to 'Show Item', restaurant_item_path(item.restaurants.first.id, item), class:"btn btn-secondary" %>
+        <a href="#" class="btn btn-dark">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+<% end %>

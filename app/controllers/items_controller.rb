@@ -1,47 +1,49 @@
+# frozen_string_literal: true
+
 class ItemsController < ApplicationController
+  before_action :find_item, except: %i[index new create]
   def index
-    @item = Item.all
+    @items = Item.all
   end
 
   def new
-    @item = Item.new
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @item = @restaurant.items.new
   end
 
-  def show
-    @item = Item.find(params[:id])
-  end
+  def show; end
 
   def create
-    @item = Item.create(item_params)
-    if @item.save
-      redirect_to items_path
-    else
-      render 'new'
-    end
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @item = @restaurant.items.create(item_params)
+    redirect_to restaurant_path(@restaurant)
   end
 
-  def edit
-    @item = Item.find_by_id(params[:id])
-  end
+  def edit; end
 
   def update
-    @item = Item.find_by_id(params[:id])
     if @item.update(item_params)
-      redirect_to items_path
+      redirect_to @restaurant
     else
-      render 'new'
+      render 'edit'
     end
   end
 
   def destroy
-    @item = Item.find_by_id(params[:id])
     @item.destroy
-    redirect_to items_path
+    redirect_to @restaurant
   end
 
   private
 
-  def item_params()
+  def item_params
     params.require(:item).permit(:title, :description, :price, :status, images: [])
+  end
+
+  def find_item
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @item = Item.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => error
+    redirect_to root_path, notice: error.message
   end
 end

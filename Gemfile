@@ -33,10 +33,17 @@ gem 'bootstrap', '~> 5.1.3'
 
 gem 'jquery-rails'
 
-gem 'cloudinary', require: false
 gem 'activestorage-cloudinary-service'
+gem 'cloudinary', require: false
 
-gem  'annotate'
+gem 'annotate'
+
+group :development, :test do
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec' # or gem 'rubocop-rspec' depending on your test suite
+end
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -48,6 +55,8 @@ gem 'devise', '~> 4.8', '>= 4.8.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+gem 'bullet', group: 'development'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
