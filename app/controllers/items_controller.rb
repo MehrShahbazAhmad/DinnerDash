@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
 
   def find_item
     @restaurant = Restaurant.find(params[:restaurant_id])
-    @item = Item.find(params[:id])
+    @item = @restaurant.items.find(params[:id])
   rescue ActiveRecord::RecordNotFound => error
     redirect_to root_path, notice: error.message
   end

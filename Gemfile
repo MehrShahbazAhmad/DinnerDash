@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'bootstrap', '~> 5.1.3'
+gem 'bootstrap', '~> 4.0.0'
 
 gem 'jquery-rails'
 
@@ -56,7 +56,7 @@ gem 'devise', '~> 4.8', '>= 4.8.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem 'bullet', group: 'development'
+# gem 'bullet', group: 'development'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,17 +1,60 @@
 <div class="container">
-    <div class="card" style="width: 18rem;">
-      <% if @item.images.present? %>
-        <%= image_tag(@item.images.first, alt: "Edit Entry", class: "Card image cap") %>
-      <% else %>
-        <%= image_tag('defult.jpeg', alt: "Edit Entry", class: "Card image cap", size: "200") %>
-      <% end %>
-      <div class="card-body">
-        <h5 class="card-title"><%= @item.title %></h5>
-        <p class="card-text">$ <%= @item.price %></p>
-        <p class="card-text"><%= @item.description %></p>
-        <a href="#" class="btn btn-dark">Add to Cart</a>
+  <div class="row">
+    <div class="col-8">
+
+      <div id="carouselExampleIndicators", class='carousel slide' data-ride='carousel'>
+        <ol class='carousel-indicators'>
+          <% @item.images.each_with_index do |image,index| %>
+            <li data-target='#carouselExampleIndicators' data-slide-to='<%= index %>' class='<%= index == 0 ? 'active' : '' %>'></li>
+          <% end %>
+        </ol>
+        <div class='carousel-inner'>
+          <% @item.images.each_with_index do |image,index| %>
+            <div class='carousel-item <%= index == 0 ? 'active' : '' %>'>
+              <%= image_tag(image, size: '800x500', class:'d-block d-100') %>
+            </div>
+          <% end %>
+        </div>
+        <a class='carousel-control-prev' href='#carouselExampleIndicators' role='button' data-slide='prev'>
+          <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+          <span class='sr-only'>Previous</span>
+        </a>
+        <a class='carousel-control-next' href='#carouselExampleIndicators' role='button' data-slide='next'>
+          <span class='carousel-control-next-icon' aria-hidden='true'></span>
+          <span class='sr-only'>Next</span>
+        </a>
       </div>
+
+    </div>
+    <div class="col-4">
+      <table class="table table-bordered">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Title</td>
+            <td colspan="2"><strong><%= @item.title %></strong></td>
+          </tr>
+          <tr>
+            <td>Price $</td>
+            <td colspan="2"><%= @item.price %></td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td colspan="2"><%= @item.description %></td>
+          </tr>
+          <tr>
+            <td>Restaurant</td>
+            <td colspan="2"><%= @item.restaurants.first.title %></td>
+          </tr>
+          <tr>
+            <td>Categeries</td>
+            <td colspan="2">Categeries</td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to 'Back', restaurant_path(@restaurant), class:"btn btn-dark"%>
+      <a href="#" class="btn btn-dark">Add to Cart</a>
     </div>
   </div>
-  <%= link_to 'Back', restaurant_path(@restaurant), class:"btn btn-dark"%>
 </div>
