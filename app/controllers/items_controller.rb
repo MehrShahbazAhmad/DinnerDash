@@ -43,7 +43,7 @@ class ItemsController < ApplicationController
   def find_item
     @restaurant = Restaurant.find(params[:restaurant_id])
     @item = @restaurant.items.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => error
-    redirect_to root_path, notice: error.message
+  rescue ActiveRecord::RecordNotFound => e
+    redirect_to root_path, notice: e.message
   end
 end

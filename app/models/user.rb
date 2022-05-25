@@ -27,9 +27,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum status: {user: 0, admin: 1}
+  enum status: { user: 0, admin: 1 }
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :user_name, uniqueness: {case_sensitive: false}, length: {minimum:2, maximum:32}
+  validates :user_name, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 32 }
 end
