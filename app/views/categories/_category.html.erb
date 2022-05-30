@@ -1,0 +1,9 @@
+
+<tr>
+  <td><%= category.title %></td>
+  <td><%= category.items.count %></td>
+  <td><%= link_to 'Show Category', category_path(category), class:"btn btn-dark" %></td>
+  <td><%= link_to 'Edit Category', edit_category_path(category), class:"btn btn-dark" %></td>
+  <td><%= link_to 'Delete Category', category, method: :delete,
+  data: { confirm: 'Are you sure?' } , class:"btn btn-dark" %></td>
+</tr>

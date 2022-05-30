@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2022_05_25_135253) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_category_items_on_category_id"
+    t.index ["item_id", "category_id"], name: "index_category_items_on_item_id_and_category_id", unique: true
     t.index ["item_id"], name: "index_category_items_on_item_id"
   end
 

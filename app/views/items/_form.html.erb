@@ -1,4 +1,4 @@
-<%= form_with(model: [restaurant, @item ], local: true) do |form| %>
+<%= form_with(model: [restaurant, restaurant.items.build], local: true) do |form| %>
 
   <% if @item.errors.any? %>
     <div id="error_explanation">
@@ -28,22 +28,27 @@
     <%= form.number_field :price, step: 0.01, class:"input form-control", placeholder: 'Price' %>
   </div>
 
-  <div class="field form-group pb-2">
+  <h4>Status:</h4>
+  <div class="field form-check pb-2">
     <%= form.radio_button :status, 'active', :checked => true, class: "form-check-input" %> Active <br>
     <%= form.radio_button :status, 'closed', class: "form-check-input"%> Closed
   </div>
 
-  <div class="field form-group pb-2">
-    <%= form.label :images %>
-    <%= form.file_field :images, multiple: true %>
-  </div>
+  <% if @item.new_record? %>
+    <h4>Images:</h4>
+    <div class="field form-group pb-2">
+      <%= form.file_field :images, multiple: true %>
+    </div>
+
+    <h4>Categories:</h4>
+    <div class="field form-check pb-2">
+      <% @category.each do |x| %>
+        <%= form.check_box :categories, { :multiple => true }, x.id, nil %> <%= x.title %> <br>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="actions">
-    <% if @item.new_record? %>
-      <%= form.submit 'Create Item', class:"btn btn-dark " %>
-    <% else %>
-      <%= form.submit 'Update Item', class:"btn btn-dark " %>
-    <% end %>
+    <%= form.submit class:"btn btn-dark " %>
   </div>
-
 <% end %>

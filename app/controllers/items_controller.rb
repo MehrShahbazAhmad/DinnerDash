@@ -2,24 +2,30 @@
 
 class ItemsController < ApplicationController
   before_action :find_item, except: %i[index new create]
+  before_action :find_restaurant, only: %i[new create]
   def index
     @items = Item.all
   end
 
   def new
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @item = @restaurant.items.new
   end
 
   def show; end
 
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @item = @restaurant.items.create(item_params)
-    redirect_to restaurant_path(@restaurant)
+    if @item.save
+      @item.category_ids = (params.require(:item)[:categories])
+      redirect_to restaurant_path(@restaurant)
+    else
+      render 'new'
+    end
   end
 
-  def edit; end
+  def edit
+    @category = Category.all
+  end
 
   def update
     if @item.update(item_params)
@@ -38,6 +44,11 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:title, :description, :price, :status, images: [])
+  end
+
+  def find_restaurant
+    @category = Category.all
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
   def find_item
