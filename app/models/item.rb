@@ -18,6 +18,9 @@ class Item < ApplicationRecord
   has_many :restaurant_items, dependent: :destroy
   has_many :restaurants, through: :restaurant_items
 
+  has_many :category_items, dependent: :destroy
+  has_many :categories, through: :category_items
+
   enum status: { active: 0, closed: 1 }
 
   validates :title, presence: true, uniqueness: true

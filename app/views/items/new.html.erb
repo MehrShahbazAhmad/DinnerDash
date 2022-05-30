@@ -1,6 +1,6 @@
 <div class="container">
   <h1>New Item for <%= @restaurant.title %></h1>
-  <%= render 'form', restaurant: @restaurant %>
+  <%= render 'form', restaurant: @restaurant, category: @category %>
 
   <%= link_to 'Back', restaurant_path(@restaurant), class:"btn btn-dark"%>
 </div>

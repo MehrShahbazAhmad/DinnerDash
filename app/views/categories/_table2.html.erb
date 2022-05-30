@@ -1,0 +1,28 @@
+<div class="container">
+  <div class = "table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table scroll">
+      <thead class="thead-dark">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Add</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% items.each do |item| %>
+          <% if !item.categories.include? category %>
+            <tr>
+              <td><%= item.title %></td>
+              <td><%= item.description %></td>
+              <td>$<%= item.price %></td>
+              <td><%= item.status %></td>
+              <td><%= link_to 'Add', add_item_category_item_path(category.id, item.id), method: 'post',  class:"btn btn-dark"%></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

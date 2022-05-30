@@ -34,9 +34,10 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 
 gem 'activestorage-cloudinary-service'
-gem 'cloudinary', require: false
+gem 'cloudinary'
 
 gem 'annotate'
+gem 'pundit'
 
 group :development, :test do
   gem 'rubocop'

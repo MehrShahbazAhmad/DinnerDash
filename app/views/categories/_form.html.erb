@@ -1,13 +1,13 @@
-<%= form_with(model: @restaurant, local: true) do |form| %>
+<%= form_with(model: @category, local: true) do |form| %>
 
-  <% if @restaurant.errors.any? %>
+  <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2>
-        <%= pluralize( @restaurant.errors.count, "error" ) %> prohibited this Restaurant from being saved:
+        <%= pluralize( @category.errors.count, "error" ) %> prohibited this Restaurant from being saved:
       </h2>
 
       <ul>
-        <% @restaurant.errors.full_messages.each do |message| %>
+        <% @category.errors.full_messages.each do |message| %>
           <li>
             <%= message %>
           </li>
