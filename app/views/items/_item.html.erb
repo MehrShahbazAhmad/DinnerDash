@@ -1,0 +1,35 @@
+<% if item.active? %>
+  <div class="col-sm">
+    <div class="card" style="width: 18rem;">
+      <% if item.images.present? %>
+        <%= image_tag(item.images.first, alt: "Item Image", class: "Card image cap", size: "287x200") %>
+      <% else %>
+        <%= image_tag('defult.jpeg', alt: "Item Image", class: "Card image cap", size: "287x200") %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= item.title %></h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">$ <%= item.price %></li>
+        <li class="list-group-item"><%= item.description %></li>
+        <li class="list-group-item"><%= item.restaurants.first.title %></li>
+        <li class="list-group-item">
+          <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Categories
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% item.categories.each do |x| %>
+                <a class="dropdown-item" href="#"><%= x.title %></a>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="card-body">
+        <%= link_to 'Show Item', restaurant_item_path(item.restaurants.first.id, item), class:"btn btn-secondary" %>
+        <a href="#" class="btn btn-dark">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+<% end %>

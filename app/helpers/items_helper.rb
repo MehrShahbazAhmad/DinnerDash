@@ -1,5 +1,4 @@
 # frozen_string_literal: true
 
-# Home Module
-module HomeHelper
+module ItemsHelper
 end
