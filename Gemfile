@@ -37,6 +37,7 @@ gem 'activestorage-cloudinary-service'
 gem 'cloudinary'
 
 gem 'annotate'
+gem 'pundit'
 
 group :development, :test do
   gem 'rubocop'

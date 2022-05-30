@@ -2,7 +2,6 @@
 
 class CategoriesController < ApplicationController
   before_action :find_category, except: %i[index new create]
-  before_action :find_item, only: %i[add_item delete_item]
   def index
     @categories = Category.all
   end
@@ -18,6 +17,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.create(category_params)
     if @category.save
+      flash[:notice] = 'Category was successfully created'
       redirect_to categories_path
     else
       render 'new'
@@ -28,6 +28,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
+      flash[:notice] = 'Category was successfully updated'
       redirect_to categories_path
     else
       render 'edit'
@@ -39,26 +40,7 @@ class CategoriesController < ApplicationController
     redirect_to categories_path
   end
 
-  def add_item
-    @category.items << @item
-    redirect_to category_path(@category)
-  end
-
-  def delete_item
-    @item = Item.find(params[:item_id])
-    if @item.categories.count == 1
-      flash[:notice] = "Atleast one category required for #{@item.title}"
-    else
-      @category.items.destroy(@item)
-    end
-    redirect_to category_path(@category)
-  end
-
   private
-
-  def find_item
-    @item = Item.find(params[:item_id])
-  end
 
   def category_params
     params.require(:category).permit(:title)

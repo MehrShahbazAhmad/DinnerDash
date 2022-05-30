@@ -4,14 +4,24 @@
 
       <div id="carouselExampleIndicators", class='carousel slide' data-ride='carousel'>
         <ol class='carousel-indicators'>
-          <% @item.images.each_with_index do |image,index| %>
-            <li data-target='#carouselExampleIndicators' data-slide-to='<%= index %>' class='<%= index == 0 ? 'active' : '' %>'></li>
+          <% if @item.images.present? %>
+            <% @item.images.each_with_index do |image,index| %>
+              <li data-target='#carouselExampleIndicators' data-slide-to='<%= index %>' class='<%= index == 0 ? 'active' : '' %>'></li>
+            <% end %>
+          <% else %>
+            <li data-target='#carouselExampleIndicators' data-slide-to='0' class='active'></li>
           <% end %>
         </ol>
         <div class='carousel-inner'>
-          <% @item.images.each_with_index do |image,index| %>
-            <div class='carousel-item <%= index == 0 ? 'active' : '' %>'>
-              <%= image_tag(image, size: '800x500', class:'d-block d-100') %>
+          <% if @item.images.present? %>
+            <% @item.images.each_with_index do |image,index| %>
+              <div class='carousel-item <%= index == 0 ? 'active' : '' %>'>
+                <%= image_tag(image, size: '800x500', class:'d-block d-100') %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class='carousel-item active'>
+              <%= image_tag('defult.jpeg', size: '500x500', class:'d-block d-100') %>
             </div>
           <% end %>
         </div>
@@ -48,12 +58,19 @@
             <td colspan="2"><%= @item.restaurants.first.title %></td>
           </tr>
           <tr>
-            <td>Categeries</td>
-            <td colspan="2">
+            <td colspan="1"></td>
+            <td colspan="2 align-center">
               <ul class="list-group">
-                <% @item.categories.each do |category| %>
-                  <li class="list-group-item"><%= category.title %></li>
-                <% end %>
+                <div class="dropdown">
+                  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% @item.categories.each do |x| %>
+                      <a class="dropdown-item" href="#"><%= x.title %></a>
+                    <% end %>
+                  </div>
+                </div>
               </ul>
             </td>
           </tr>

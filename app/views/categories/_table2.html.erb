@@ -18,7 +18,7 @@
               <td><%= item.description %></td>
               <td>$<%= item.price %></td>
               <td><%= item.status %></td>
-              <td><%= link_to 'Add', "/items/#{item.id}/categories/#{category.id}/add_item",method: 'post',remote: true, class:"btn btn-dark"%></td>
+              <td><%= link_to 'Add', add_item_category_item_path(category.id, item.id), method: 'post',  class:"btn btn-dark"%></td>
             </tr>
           <% end %>
         <% end %>

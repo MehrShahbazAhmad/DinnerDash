@@ -17,15 +17,15 @@
   <% end %>
 
   <div class="field form-group pb-2">
-    <%= form.text_field :title, class:"form-control", placeholder: 'Title' %>
+    <%= form.text_field :title, class:"form-control", placeholder: 'Title', required: true %>
   </div>
 
   <div class="field form-group pb-2">
-    <%= form.text_field :description, class:"form-control", placeholder: 'Description' %>
+    <%= form.text_field :description, class:"form-control", placeholder: 'Description', required: true %>
   </div>
 
   <div class="field form-group pb-2">
-    <%= form.number_field :price, step: 0.01, class:"input form-control", placeholder: 'Price' %>
+    <%= form.number_field :price, step: 0.01, class:"input form-control", placeholder: 'Price', required: true, min: 0.01 %>
   </div>
 
   <h4>Status:</h4>
@@ -42,7 +42,7 @@
 
     <h4>Categories:</h4>
     <div class="field form-check pb-2">
-      <% @category.each do |x| %>
+      <% category.each do |x| %>
         <%= form.check_box :categories, { :multiple => true }, x.id, nil %> <%= x.title %> <br>
       <% end %>
     </div>

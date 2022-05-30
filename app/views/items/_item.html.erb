@@ -14,11 +14,16 @@
         <li class="list-group-item"><%= item.description %></li>
         <li class="list-group-item"><%= item.restaurants.first.title %></li>
         <li class="list-group-item">
-          <ul class="list-group">
-            <% item.categories.each do |category| %>
-              <li class="list-group-item"><%= category.title %></li>
-            <% end %>
-          </ul>
+          <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Categories
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% item.categories.each do |x| %>
+                <a class="dropdown-item" href="#"><%= x.title %></a>
+              <% end %>
+            </div>
+          </div>
         </li>
       </ul>
       <div class="card-body">
