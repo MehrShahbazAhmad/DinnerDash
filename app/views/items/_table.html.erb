@@ -1,0 +1,50 @@
+<table class="table table-bordered">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Title</td>
+      <td colspan="2"><strong>
+          <%= item.title %>
+        </strong></td>
+    </tr>
+    <tr>
+      <td>Price $</td>
+      <td colspan="2">
+        <%= item.price %>
+      </td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td colspan="2">
+        <%= item.description %>
+      </td>
+    </tr>
+    <tr>
+      <td>Restaurant</td>
+      <td colspan="2">
+        <%= item.restaurants.first.title %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1"></td>
+      <td colspan="2 align-center">
+        <ul class="list-group">
+          <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Categories
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% item.categories.each do |x| %>
+                <a class="dropdown-item" href="#">
+                  <%= x.title %>
+                </a>
+                <% end %>
+            </div>
+          </div>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

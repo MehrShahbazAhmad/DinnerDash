@@ -48,7 +48,5 @@ class CategoriesController < ApplicationController
 
   def find_category
     @category = Category.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    redirect_to categories_path, notice: e.message
   end
 end

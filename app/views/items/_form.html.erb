@@ -42,7 +42,7 @@
 
     <h4>Categories:</h4>
     <div class="field form-check pb-2">
-      <% category.each do |x| %>
+      <% categories.each do |x| %>
         <%= form.check_box :categories, { :multiple => true }, x.id, nil %> <%= x.title %> <br>
       <% end %>
     </div>

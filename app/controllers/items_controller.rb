@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :find_item, except: %i[index new create add_item delete_item]
-  before_action :find_restaurant, only: %i[new create]
+  before_action :categories, only: %i[new edit]
+  before_action :find_restaurant, only: %i[show new edit create destroy]
+  before_action :find_item, only: %i[show edit destroy]
+  before_action :find_category_item, only: %i[add_item delete_item]
   before_action :find_category, only: %i[add_item delete_item]
+
   def index
     @items = Item.all
   end
@@ -25,9 +28,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-    @category = Category.all
-  end
+  def edit; end
 
   def update
     if @item.update(item_params)
@@ -60,25 +61,26 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :price, :status, images: [], category_ids: [])
+    params.require(:item).permit(:title, :description, :price, :status, images: [])
+  end
+
+  def categories
+    @categories = Category.all
+  end
+
+  def find_category_item
+    @item = Item.find(params[:id])
   end
 
   def find_restaurant
-    @category = Category.all
     @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
   def find_item
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @item = @restaurant.items.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    redirect_to root_path, notice: e.message
   end
 
   def find_category
     @category = Category.find(params[:category_id])
-    @item = Item.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    redirect_to root_path, notice: e.message
   end
 end

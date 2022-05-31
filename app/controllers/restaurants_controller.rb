@@ -46,7 +46,5 @@ class RestaurantsController < ApplicationController
 
   def find_restaurant
     @restaurant = Restaurant.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    redirect_to restaurants_path, notice: e.message
   end
 end
