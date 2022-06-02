@@ -28,7 +28,8 @@
       </ul>
       <div class="card-body">
         <%= link_to 'Show Item', restaurant_item_path(item.restaurants.first.id, item), class:"btn btn-secondary" %>
-        <a href="#" class="btn btn-dark">Add to Cart</a>
+        <br>
+        <%= button_to "Add to cart", add_quantity_carts_cart_items_path(item_id: item.id), class:"btn btn-dark" %>
       </div>
     </div>
   </div>

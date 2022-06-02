@@ -21,6 +21,8 @@ class Item < ApplicationRecord
   has_many :category_items, dependent: :destroy
   has_many :categories, through: :category_items
 
+  has_many :cart_items, dependent: :destroy
+
   enum status: { active: 0, closed: 1 }
 
   validates :title, presence: true, uniqueness: true

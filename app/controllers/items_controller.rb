@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :categories, only: %i[new edit]
+  before_action :categories, only: %i[new edit create]
   before_action :find_restaurant, only: %i[show new edit create destroy]
   before_action :find_item, only: %i[show edit destroy]
   before_action :find_category_item, only: %i[add_item delete_item]
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = @restaurant.items.create(item_params)
-    if @item.save
+    if @item.id?
       @item.category_ids = (params.require(:item)[:categories])
       flash[:notice] = 'Item was successfully created'
       redirect_to restaurant_path(@restaurant)
@@ -46,6 +46,7 @@ class ItemsController < ApplicationController
 
   def add_item
     @category.items << @item
+    flash[:notice] = "#{@item.title} has been added"
     redirect_to category_path(@category)
   end
 
@@ -54,6 +55,7 @@ class ItemsController < ApplicationController
       flash[:notice] = "Atleast one category required for #{@item.title}"
     else
       @category.items.destroy(@item)
+      flash[:notice] = "#{@item.title} has been removed"
     end
     redirect_to category_path(@category)
   end

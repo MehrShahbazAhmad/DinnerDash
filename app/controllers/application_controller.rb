@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :current_cart
 
   rescue_from ActionController::RoutingError, with: :render404
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
@@ -25,6 +26,20 @@ class ApplicationController < ActionController::Base
     end
     devise_parameter_sanitizer.permit(:account_update) do |u|
       u.permit(:name, :email, :password, :current_password, :first_name, :last_name, :user_name, :status)
+    end
+  end
+
+  private
+
+  def current_cart
+    if session[:cart_id]
+      @current_cart = Cart.find_by(id: session[:cart_id])
+    else
+      @current_cart = Cart.new
+      @current_cart.user_id = current_user.id
+      @current_cart.total = 0
+      @current_cart.save
+      session[:cart_id] = @current_cart.id
     end
   end
 end

@@ -14,7 +14,7 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.create(restaurant_params)
-    if @restaurant.save
+    if @restaurant.id?
       flash[:notice] = 'Restaurant was successfully created'
       redirect_to restaurants_path
     else

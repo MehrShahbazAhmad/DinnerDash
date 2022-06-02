@@ -16,5 +16,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :carts, only: %i[show destroy] do
+    resource :cart_items, only: %i[add_quantity reduce_quantity] do
+      post :add_quantity
+      post :reduce_quantity
+    end
+  end
+
   root 'items#index'
 end

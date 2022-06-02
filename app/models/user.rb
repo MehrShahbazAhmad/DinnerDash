@@ -29,6 +29,8 @@ class User < ApplicationRecord
 
   enum status: { user: 0, admin: 1 }
 
+  has_one :cart, dependent: :destroy
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :user_name, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 32 }
