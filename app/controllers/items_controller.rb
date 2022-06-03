@@ -13,12 +13,14 @@ class ItemsController < ApplicationController
 
   def new
     @item = @restaurant.items.new
+    authorize @item
   end
 
   def show; end
 
   def create
     @item = @restaurant.items.create(item_params)
+    authorize @item
     if @item.id?
       @item.category_ids = (params.require(:item)[:categories])
       flash[:notice] = 'Item was successfully created'
@@ -28,9 +30,12 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @item
+  end
 
   def update
+    authorize @item
     if @item.update(item_params)
       flash[:notice] = 'Item was successfully Updated'
       redirect_to @restaurant
@@ -40,6 +45,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    authorize @item
     @item.destroy
     redirect_to @restaurant
   end

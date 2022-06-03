@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionController::RoutingError, with: :render404
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorized_error
   def render404
     redirect_to(request.referer || root_path)
   end
@@ -16,6 +17,11 @@ class ApplicationController < ActionController::Base
   def record_not_found
     flash[:notice] = 'Unable to find the records.'
     redirect_to(request.referer || root_path)
+  end
+
+  def not_authorized_error
+    flash[:notice] = 'You are not authorized for this action.'
+    redirect_to root_path
   end
 
   protected
@@ -32,14 +38,25 @@ class ApplicationController < ActionController::Base
   private
 
   def current_cart
-    if session[:cart_id]
-      @current_cart = Cart.find_by(id: session[:cart_id])
+    if user_signed_in?
+      @current_cart = find_cart
+      @current_cart ||= new_cart unless @current_cart
     else
       @current_cart = Cart.new
-      @current_cart.user_id = current_user.id
       @current_cart.total = 0
-      @current_cart.save
-      session[:cart_id] = @current_cart.id
     end
+    session[:cart_id] = @current_cart.id
+  end
+
+  def find_cart
+    @cart = Cart.find_by(user_id: current_user.id)
+  end
+
+  def new_cart
+    @current_cart = Cart.new
+    @current_cart.user_id = current_user.id
+    @current_cart.total = 0
+    @current_cart.save
+    @current_cart
   end
 end
