@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CartItemsController < ApplicationController
-  before_action :find_item, :cart
-  # before_action :cart
+  before_action :find_item, :cart_item, except: %i[clear_cart]
+  before_action :cart
 
   def add_quantity
     if @cart.items.include?(@item)
@@ -15,7 +15,6 @@ class CartItemsController < ApplicationController
   end
 
   def reduce_quantity
-    @cart_item = @cart.cart_items.find_by(item_id: @item.id)
     if @cart_item.quantity == 1
       @cart_item.destroy
       flash[:notice] = "#{@item.title} Removed from the Cart"
@@ -23,6 +22,18 @@ class CartItemsController < ApplicationController
       quantity_decrement
     end
     @cart_item.save
+    redirect_to carts_path(@cart)
+  end
+
+  def delete_item
+    @cart_item.destroy
+    flash[:notice] = "#{@item.title} Removed from the Cart"
+    redirect_to carts_path(@cart)
+  end
+
+  def clear_cart
+    @cart.cart_items.each(&:destroy)
+    flash[:notice] = 'Cart has been cleared'
     redirect_to carts_path(@cart)
   end
 
@@ -40,8 +51,11 @@ class CartItemsController < ApplicationController
     @cart = @current_cart
   end
 
-  def quantity_increment
+  def cart_item
     @cart_item = @cart.cart_items.find_by(item_id: @item.id)
+  end
+
+  def quantity_increment
     if @cart_item.quantity >= 10
       flash[:notice] = 'Item quantity cannot be greater than 10'
     else

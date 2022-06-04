@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   before_action :find_category, only: %i[add_item delete_item]
 
   def index
-    @items = Item.all
+    @items = Item.all.order(:title)
   end
 
   def new

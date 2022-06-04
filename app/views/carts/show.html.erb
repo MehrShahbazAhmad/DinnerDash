@@ -1,4 +1,6 @@
 <h2>Cart</h2>
 <%= render 'table', cart: @cart %>
 <%= link_to 'Back', root_path, class:"btn btn-dark"%>
-
+<% unless user_signed_in? %>
+  <%= link_to 'Sign In', new_user_session_path, class: "btn btn-dark" %>
+<% end %>

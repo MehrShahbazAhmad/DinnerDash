@@ -8,6 +8,7 @@
           <th>Quantity</th>
           <th>Increase</th>
           <th>Decrease</th>
+          <th>Remove</th>
           <th>Subtotal</th>
         </tr>
       </thead>
@@ -24,12 +25,14 @@
               <td><%= cart_item.quantity %></td>
               <td><%= button_to '-', reduce_quantity_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
               <td><%= button_to '+', add_quantity_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
+              <td><%= button_to 'Remove', delete_item_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
               <td>$<%= cart_item.sub_total %></td>
             </tr>
           <% end %>
         <% end %>
       </tbody>
       <tfoot>
+        <td><%= button_to 'Clear Cart', clear_cart_carts_cart_items_path, class:"btn btn-dark" %></td>
         <td></td>
         <td></td>
         <td></td>

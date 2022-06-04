@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resource :cart_items, only: %i[add_quantity reduce_quantity] do
       post :add_quantity
       post :reduce_quantity
+      post :delete_item
+      post :clear_cart
     end
   end
 
