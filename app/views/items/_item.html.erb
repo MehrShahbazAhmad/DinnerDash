@@ -29,7 +29,9 @@
       <div class="card-body">
         <%= link_to 'Show Item', restaurant_item_path(item.restaurants.first.id, item), class:"btn btn-secondary" %>
         <br>
-        <%= button_to "Add to cart", add_quantity_carts_cart_items_path(item_id: item.id), class:"btn btn-dark" %>
+        <% if user_signed_in? && current_user.user? %>
+          <%= button_to "Add to cart", add_quantity_carts_cart_items_path(item_id: item.id), class:"btn btn-dark" %>
+        <% end %>
       </div>
     </div>
   </div>

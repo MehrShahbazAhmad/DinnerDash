@@ -2,11 +2,11 @@
 
 class CategoryPolicy < ApplicationPolicy
   def index?
-    check_admin
+    check_user
   end
 
   def show?
-    check_admin
+    check_user
   end
 
   def create?
@@ -35,5 +35,11 @@ class CategoryPolicy < ApplicationPolicy
     raise Pundit::NotAuthorizedError unless @user.admin?
 
     @user.admin?
+  end
+
+  def check_user
+    raise Pundit::NotAuthorizedError unless @user
+
+    @user
   end
 end

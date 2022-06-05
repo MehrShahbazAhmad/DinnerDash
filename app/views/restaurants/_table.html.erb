@@ -1,29 +1,48 @@
 <div class="container">
-  <table class="table">
+  <table class="table text-center">
     <thead class="thead-dark">
       <tr>
         <th>Title</th>
         <th>Description</th>
         <th>Price</th>
-        <th>Status</th>
+        <% if current_user.admin? %>
+          <th>Status</th>
+        <% end %>
         <th>Show</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <% if current_user.admin? %>
+          <th>Edit</th>
+          <th>Delete</th>
+        <% end %>
       </tr>
     </thead>
-    <tbody>
-      <% restaurant.items.each do |item| %>
-        <tr>
-            <td><%= item.title %></td>
-            <td><%= item.description %></td>
-            <td>$<%= item.price %></td>
-            <td><%= item.status %></td>
-            <td><%= link_to 'Show Item', restaurant_item_path(restaurant, item), class:"btn btn-secondary" %></td>
-            <td><%= link_to 'Edit Item', edit_restaurant_item_path(restaurant, item), class:"btn btn-secondary" %></td>
-            <td><%= link_to 'Delete', [restaurant, item], method: :delete,
-            data: { confirm: 'Are you sure?' } , class:"btn btn-dark" %></td>
-        </tr>
-      <% end %>
-  </tbody>
+    <% if current_user.admin? %>
+      <tbody>
+        <% restaurant.items.each do |item| %>
+          <tr>
+              <td><%= item.title %></td>
+              <td><%= item.description %></td>
+              <td>$<%= item.price %></td>
+              <td><%= item.status %></td>
+              <td><%= link_to 'Show Item', restaurant_item_path(restaurant, item), class:"btn btn-dark" %></td>
+              <td><%= link_to 'Edit Item', edit_restaurant_item_path(restaurant, item), class:"btn btn-dark" %></td>
+              <td><%= link_to 'Delete', [restaurant, item], method: :delete,
+              data: { confirm: 'Are you sure?' } , class:"btn btn-dark" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% else %>
+      <tbody>
+        <% restaurant.items.each do |item| %>
+          <% if item.active? %>
+            <tr>
+                <td><%= item.title %></td>
+                <td><%= item.description %></td>
+                <td>$<%= item.price %></td>
+                <td><%= link_to 'Show Item', restaurant_item_path(restaurant, item), class:"btn btn-dark" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    <% end %>
   </table>
 </div>

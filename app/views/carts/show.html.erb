@@ -1,6 +1,9 @@
 <h2>Cart</h2>
 <%= render 'table', cart: @cart %>
 <%= link_to 'Back', root_path, class:"btn btn-dark"%>
-<% unless user_signed_in? %>
+<% unless user_signed_in? && current_user.user? %>
   <%= link_to 'Sign In', new_user_session_path, class: "btn btn-dark" %>
+<% end %>
+<% if @cart.cart_items.count != 0 %>
+  <%= link_to 'Check Out', new_order_path, class:"btn btn-dark"%>
 <% end %>

@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
-class RestaurantPolicy < ApplicationPolicy
+class OrderPolicy < ApplicationPolicy
   def index?
+    check_user
+  end
+
+  def new?
     check_user
   end
 
@@ -9,23 +13,11 @@ class RestaurantPolicy < ApplicationPolicy
     check_user
   end
 
-  def create?
+  def edit?
     check_admin
-  end
-
-  def new?
-    create?
   end
 
   def update?
-    check_admin
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
     check_admin
   end
 

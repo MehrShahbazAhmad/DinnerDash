@@ -5,8 +5,10 @@
     </div>
     <div class="col-4">
       <%= render 'table', item: @item %>
-      <%= link_to 'Back' , restaurant_path(@restaurant), class:"btn btn-dark"%>
-      <%= button_to "Add to cart", add_quantity_carts_cart_items_path(item_id: @item.id), class:"btn btn-dark" %>
+      <%= link_to 'Back' , root_path, class:"btn btn-dark"%>
+      <% if current_user.user? %>
+        <%= button_to "Add to cart", add_quantity_carts_cart_items_path(item_id: @item.id), class:"btn btn-dark" %>
+      <% end %>
     </div>
   </div>
 </div>

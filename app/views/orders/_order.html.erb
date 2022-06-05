@@ -1,0 +1,11 @@
+<tr>
+  <td><%= order.id %></td>
+  <td><%= order.order_items.count %></td>
+  <td><%= order.status.titleize %></td>
+  <td>$<%= order.total %></td>
+  <% if current_user.admin? %>
+    <td><%= order.user_id %></td>
+    <td><%= link_to 'Edit Order', edit_order_path(order), class:"btn btn-dark" %></td>
+  <% end %>
+  <td><%= link_to 'Show Order', order_path(order), class:"btn btn-dark" %></td>
+</tr>

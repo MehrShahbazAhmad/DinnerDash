@@ -1,0 +1,16 @@
+<%= form_with(model: @order, local: true) do |form| %>
+  <h3>Status:</h3>
+  <div class="field form-group pb-2">
+    <%= form.radio_button :status, 'active' %>
+    <%= form.label :status, 'Active', :value => 'active' %><br>
+    <%= form.radio_button :status, 'completed' %>
+    <%= form.label :status, 'Completed', :value => 'completed' %><br>
+    <%= form.radio_button :status, 'closed' %>
+    <%= form.label :status, 'Closed', :value => 'closed' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-dark " %>
+  </div>
+
+<% end %>

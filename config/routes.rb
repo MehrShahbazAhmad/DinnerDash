@@ -25,5 +25,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :orders, except: %i[destroy] do
+    resources :order_items, only: %i[add_item] do
+      post :add_item
+    end
+  end
+
   root 'items#index'
 end
