@@ -8,7 +8,12 @@ class ItemsController < ApplicationController
   before_action :find_restaurant, only: %i[edit new]
 
   def index
-    @items = Item.all.order(:title)
+    if params[:search].blank?
+      @items = Item.all.order(:title)
+    else
+      @parameters = params[:search].downcase
+      @items = Item.all.where('lower(title) LIKE ?', "%#{@parameters}%")
+    end
   end
 
   def show
