@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
   before_action :find_category, only: %i[add_item delete_item]
   before_action :find_item, only: %i[show edit destroy update]
   before_action :find_restaurant, only: %i[edit new]
+  before_action :top_three, only: %i[top_item]
 
   def index
     if params[:search].blank?
@@ -14,10 +15,7 @@ class ItemsController < ApplicationController
     else
       @parameters = params[:search].downcase
       @items = Item.all.where('lower(title) LIKE ?', "%#{@parameters}%")
-      if @parameters.count.zero?
-        flash[:notice] = "No Itme found for #{@parameters}"
-        redirect_to root_path
-      end
+      count_items
     end
   end
 
@@ -83,4 +81,6 @@ class ItemsController < ApplicationController
     end
     redirect_to category_path(@category)
   end
+
+  def top_item; end
 end

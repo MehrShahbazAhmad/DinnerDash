@@ -1,5 +1,5 @@
 <% if item.active? %>
-  <div class="col-sm">
+  <div class="col-sm mb-4">
     <div class="card" style="width: 18rem;">
       <% if item.images.present? %>
         <%= image_tag(item.images.first, alt: "Item Image", class: "Card image cap", size: "287x200") %>

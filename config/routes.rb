@@ -3,7 +3,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :items
+  resources :items do
+    get :top_item, on: :collection
+  end
   resources :restaurants
 
   resources :categories do

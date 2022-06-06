@@ -1,9 +1,8 @@
 <%= form_tag items_path, method: :get do |form| %>
-  <div class="input-group mb-3">
+  <div class="form-inline my-2 my-lg-0">
     <input type="text" class="form-control" placeholder="Search Item" name="search">
     <div class="input-group-append">
       <%= submit_tag "Search", class: "btn btn-dark"%>
     </div>
   </div>
 <% end %>
-

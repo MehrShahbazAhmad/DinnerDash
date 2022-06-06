@@ -40,4 +40,13 @@ module ItemsConcern
       CategoryItem.create(item_id: @item.id, category_id: category_id)
     end
   end
+
+  def top_three
+    @top = Item.all.order(:order_count).last(3)
+  end
+
+  def count_items
+    flash[:notice] = "No Itme found for #{@parameters}" if @items.count.zero?
+    redirect_to root_path if @items.count.zero?
+  end
 end
