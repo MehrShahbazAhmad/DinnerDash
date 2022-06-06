@@ -2,6 +2,7 @@
 
 # Application Controller
 class ApplicationController < ActionController::Base
+  include ApplicationsConcern
   include Pundit::Authorization
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -33,30 +34,5 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update) do |u|
       u.permit(:name, :email, :password, :current_password, :first_name, :last_name, :user_name, :status)
     end
-  end
-
-  private
-
-  def current_cart
-    if user_signed_in?
-      @current_cart = find_cart
-      @current_cart ||= new_cart unless @current_cart
-    else
-      @current_cart = Cart.new
-      @current_cart.total = 0
-    end
-    session[:cart_id] = @current_cart.id
-  end
-
-  def find_cart
-    @cart = Cart.find_by(user_id: current_user.id)
-  end
-
-  def new_cart
-    @current_cart = Cart.new
-    @current_cart.user_id = current_user.id
-    @current_cart.total = 0
-    @current_cart.save
-    @current_cart
   end
 end
