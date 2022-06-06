@@ -34,20 +34,6 @@
     <%= form.radio_button :status, 'closed', class: "form-check-input"%> Closed
   </div>
 
-  <% if @item.new_record? %>
-    <h4>Images:</h4>
-    <div class="field form-group pb-2">
-      <%= form.file_field :images, multiple: true %>
-    </div>
-
-    <h4>Categories:</h4>
-    <div class="field form-check pb-2">
-      <% categories.each do |x| %>
-        <%= form.check_box :categories, { :multiple => true }, x.id, nil %> <%= x.title %> <br>
-      <% end %>
-    </div>
-  <% end %>
-
   <%= form.hidden_field :restaurant_id, value: restaurant.id %>
 
   <div class="actions">

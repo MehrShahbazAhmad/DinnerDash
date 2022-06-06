@@ -4,8 +4,8 @@
       <tr>
         <th>Title</th>
         <th>Price</th>
-        <th>Quantity</th>
         <th>Show</th>
+        <th>Quantity</th>
         <th>Subtotal</th>
       </tr>
     </thead>
@@ -14,7 +14,7 @@
         <tr>
           <td><%= order_item.item.title.titleize %></td>
           <td>$<%= order_item.item.price %></td>
-          <td><%= link_to 'Show Item', restaurant_item_path(order_item.item.restaurants.first, order_item.item), class:"btn btn-dark" %></td>
+          <td><%= link_to 'Show Item', item_path(order_item.item), class:"btn btn-dark" %></td>
           <td><%= order_item.quantity %></td>
           <td>$<%= order_item.sub_total %></td>
         </tr>

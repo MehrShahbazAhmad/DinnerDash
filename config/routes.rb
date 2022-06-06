@@ -3,9 +3,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :restaurants do
-    resources :items
-  end
+  resources :items
+  resources :restaurants
 
   resources :categories do
     resources :items, only: %i[add_item delete_item] do
