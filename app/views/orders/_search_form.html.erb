@@ -1,0 +1,25 @@
+<%= form_tag orders_path, method: :get do |form| %>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" id="html" name="status" value="all" checked>
+    <label class="form-check-label" for="html">All</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" id="html" name="status" value="ordered">
+    <label class="form-check-label" for="html">Ordered</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" id="html" name="status" value="paid">
+    <label class="form-check-label" for="html">Paid</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" id="html" name="status" value="cancelled">
+    <label class="form-check-label" for="html">Cancelled</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" id="html" name="status" value="completed">
+    <label class="form-check-label" for="html">Completed</label>
+  </div>
+  <div class="input-group-append">
+    <%= submit_tag "Filter", class: "btn btn-dark"%>
+  </div>
+<% end %>

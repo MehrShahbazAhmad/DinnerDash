@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Orders</h1>
+  <%= render 'search_form'%>
   <table class="table text-center">
     <thead class="thead-dark">
       <tr>
@@ -15,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <% if @orders.count == 0 %>
+      <% if @orders.nil? %>
         <tr>
           <td><strong>No Orders at the Moment </strong></td>
         </tr>

@@ -1,12 +1,14 @@
 <%= form_with(model: @order, local: true) do |form| %>
   <h3>Status:</h3>
   <div class="field form-group pb-2">
-    <%= form.radio_button :status, 'active' %>
-    <%= form.label :status, 'Active', :value => 'active' %><br>
+    <%= form.radio_button :status, 'ordered' %>
+    <%= form.label :status, 'Ordered', value: 'ordered' %><br>
+    <%= form.radio_button :status, 'paid' %>
+    <%= form.label :status, 'Paid', value: 'paid' %><br>
+    <%= form.radio_button :status, 'cancelled' %>
+    <%= form.label :status, 'Cancelled', value: 'cancelled' %><br>
     <%= form.radio_button :status, 'completed' %>
-    <%= form.label :status, 'Completed', :value => 'completed' %><br>
-    <%= form.radio_button :status, 'closed' %>
-    <%= form.label :status, 'Closed', :value => 'closed' %>
+    <%= form.label :status, 'Completed', value: 'completed' %>
   </div>
 
   <div class="actions">

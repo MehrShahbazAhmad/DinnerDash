@@ -23,6 +23,8 @@ module OrdersConcern
     @cart.cart_items.each do |cart_item|
       @order.order_items.create(item_id: cart_item.item.id, order_id: @order.id, quantity: cart_item.quantity,
                                 sub_total: cart_item.sub_total)
+      cart_item.item.order_count += 1
+      cart_item.item.save
     end
     calculate_total
   end
@@ -43,4 +45,12 @@ module OrdersConcern
     @order.save
   end
 
+  def filter_order
+    if params[:status].blank?
+      @orders
+    else
+      @parameters = params[:status]
+      @orders = Order.find_by(status: @parameters) unless @parameters == 'all'
+    end
+  end
 end
