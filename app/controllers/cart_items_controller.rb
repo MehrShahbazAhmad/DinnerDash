@@ -26,7 +26,7 @@ class CartItemsController < ApplicationController
     redirect_to carts_path(@cart)
   end
 
-  def delete_item
+  def remove_item
     @cart_item.destroy
     flash[:notice] = "#{@item.title} Removed from the Cart"
     redirect_to carts_path(@cart)

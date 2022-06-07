@@ -3,9 +3,7 @@
 class CartsController < ApplicationController
   before_action :cart
 
-  def show
-    calculate_total
-  end
+  def show; end
 
   def destroy
     @cart.destroy
@@ -14,12 +12,6 @@ class CartsController < ApplicationController
   end
 
   private
-
-  def calculate_total
-    @cart.cart_items.each do |cart_items|
-      @cart.total += cart_items.sub_total
-    end
-  end
 
   def cart
     @cart = @current_cart

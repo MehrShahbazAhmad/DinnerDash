@@ -16,7 +16,7 @@
           <td>$<%= order_item.item.price %></td>
           <td><%= link_to 'Show Item', item_path(order_item.item), class:"btn btn-dark" %></td>
           <td><%= order_item.quantity %></td>
-          <td>$<%= order_item.sub_total %></td>
+          <td>$<%= calculate_item_total(order_item) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -27,7 +27,7 @@
       <td>
         <strong>Total</strong>
       </td>
-      <td>$<%= order.total %></td>
+      <td>$<%= calculate_total(order) %></td>
     </tfoot>
   </table>
 </div>

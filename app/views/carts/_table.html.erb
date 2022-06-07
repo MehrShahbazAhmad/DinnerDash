@@ -24,8 +24,8 @@
             <td><%= cart_item.quantity %></td>
             <td><%= button_to '-', reduce_quantity_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
             <td><%= button_to '+', add_quantity_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
-            <td><%= button_to 'Remove', delete_item_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
-            <td>$<%= cart_item.sub_total %></td>
+            <td><%= button_to 'Remove', remove_item_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
+            <td>$<%= calculate_item_total(cart_item) %></td>
           </tr>
         <% end %>
       <% end %>
@@ -43,7 +43,7 @@
       <td>
         <strong>Total</strong>
       </td>
-      <td>$<%= cart.total %></td>
+      <td>$<%= calculate_total_cart(cart) %></td>
     </tfoot>
   </table>
 </div>

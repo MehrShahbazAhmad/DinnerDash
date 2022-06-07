@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_06_150536) do
+ActiveRecord::Schema.define(version: 2022_06_07_072156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_150536) do
     t.bigint "item_id"
     t.bigint "cart_id"
     t.integer "quantity", default: 1, null: false
-    t.decimal "sub_total", precision: 5, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
@@ -49,7 +48,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_150536) do
 
   create_table "carts", force: :cascade do |t|
     t.bigint "user_id"
-    t.decimal "total", precision: 5, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
@@ -87,7 +85,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_150536) do
     t.bigint "item_id"
     t.bigint "order_id"
     t.integer "quantity", default: 1, null: false
-    t.decimal "sub_total", precision: 5, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_order_items_on_item_id"
@@ -96,7 +93,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_150536) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
-    t.decimal "total", precision: 5, scale: 2, null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

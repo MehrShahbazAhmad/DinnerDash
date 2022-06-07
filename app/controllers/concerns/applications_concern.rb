@@ -9,7 +9,6 @@ module ApplicationsConcern
       @current_cart ||= new_cart unless @current_cart
     else
       @current_cart = Cart.new
-      @current_cart.total = 0
     end
     session[:cart_id] = @current_cart.id
   end
@@ -21,7 +20,6 @@ module ApplicationsConcern
   def new_cart
     @current_cart = Cart.new
     @current_cart.user_id = current_user.id
-    @current_cart.total = 0
     @current_cart.save
     @current_cart
   end

@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
     if check_categories
       @item = Item.create(item_params)
       authorize @item
-      if @item.id?
+      if @item.id
         flash[:notice] = 'Item was successfully created'
         redirect_to restaurant_path(@restaurant)
         create_links

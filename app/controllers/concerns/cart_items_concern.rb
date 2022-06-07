@@ -24,7 +24,6 @@ module CartItemsConcern
       flash[:notice] = 'Item quantity cannot be greater than 10'
     else
       @cart_item.quantity += 1
-      @cart_item.sub_total += @item.price
       flash[:notice] = "#{@item.title} quantity incremented in Cart"
     end
   end
@@ -33,13 +32,11 @@ module CartItemsConcern
     @cart_item = CartItem.new
     @cart_item.cart = @current_cart
     @cart_item.item = @item
-    @cart_item.sub_total = @item.price
     flash[:notice] = "#{@item.title} added in Cart"
   end
 
   def quantity_decrement
     @cart_item.quantity -= 1
-    @cart_item.sub_total -= @item.price
     flash[:notice] = "#{@item.title} quantity decremented in Cart"
   end
 end
