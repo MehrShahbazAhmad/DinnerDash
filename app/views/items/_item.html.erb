@@ -29,7 +29,7 @@
       <div class="card-body">
         <%= link_to 'Show Item', item_path(item), class:"btn btn-secondary" %>
         <br>
-        <% if user_signed_in? && current_user.user? %>
+        <% unless user_signed_in? && current_user.admin? %>
           <%= button_to "Add to cart", add_quantity_carts_cart_items_path(item_id: item.id), class:"btn btn-dark" %>
         <% end %>
       </div>
