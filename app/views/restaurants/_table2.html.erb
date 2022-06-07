@@ -1,0 +1,29 @@
+<% if current_user.admin? %>
+  <tbody>
+    <% restaurant.items.each do |item| %>
+      <tr>
+          <td><%= item.title %></td>
+          <td><%= item.description %></td>
+          <td>$<%= item.price %></td>
+          <td><%= item.status %></td>
+          <td><%= link_to 'Show Item', item_path(item), class:"btn btn-dark" %></td>
+          <td><%= link_to 'Edit Item', edit_item_path(item, restaurant_id: restaurant), class:"btn btn-dark" %></td>
+          <td><%= link_to 'Delete', item, method: :delete,
+          data: { confirm: 'Are you sure?' } , class:"btn btn-dark" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+<% else %>
+  <tbody>
+    <% restaurant.items.each do |item| %>
+      <% if item.active? %>
+        <tr>
+            <td><%= item.title %></td>
+            <td><%= item.description %></td>
+            <td>$<%= item.price %></td>
+            <td><%= link_to 'Show Item', item_path(item), class:"btn btn-dark" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+<% end %>
