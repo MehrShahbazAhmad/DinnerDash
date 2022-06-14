@@ -1,6 +1,6 @@
 <h1 class="text-center">Most Ordered Items</h1>
 <div class="row text-center">
-  <% @top.each do |item| %>
+  <% @items.each do |item| %>
     <%= render 'item', item: item %>
   <% end %>
 </div>

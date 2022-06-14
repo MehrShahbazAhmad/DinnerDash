@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   before_action :find_category, only: %i[add_item delete_item]
   before_action :find_item, only: %i[show edit destroy update]
   before_action :find_restaurant, only: %i[edit new]
-  before_action :top_three, only: %i[top_item]
+  before_action :top_three_items, only: %i[top_items]
 
   def index
     if params[:search].blank?
@@ -82,5 +82,5 @@ class ItemsController < ApplicationController
     redirect_to category_path(@category)
   end
 
-  def top_item; end
+  def top_items; end
 end

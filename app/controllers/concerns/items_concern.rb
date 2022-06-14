@@ -41,8 +41,8 @@ module ItemsConcern
     end
   end
 
-  def top_three
-    @top = Item.all.order(:order_count).last(3)
+  def top_three_items
+    @items = Item.all.order(:order_count).last(3)
   end
 
   def count_items
