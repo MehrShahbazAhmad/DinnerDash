@@ -3,8 +3,12 @@
 module OrdersConcern
   extend ActiveSupport::Concern
 
-  def order_params
+  def order_params_update
     params.require(:order).permit(:status)
+  end
+
+  def order_params
+    params.require(:order).permit(:user_id)
   end
 
   def find_order
@@ -13,9 +17,8 @@ module OrdersConcern
   end
 
   def create_order
-    @order.user_id = @cart.user_id
-    @order.save
     create_order_items
+    @cart.cart_items.each(&:destroy)
   end
 
   def create_order_items

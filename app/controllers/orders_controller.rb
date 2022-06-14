@@ -12,8 +12,12 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     authorize @order
+  end
+
+  def create
+    @order = Order.create(order_params)
+    authorize @order
     create_order
-    @cart.cart_items.each(&:destroy)
     flash[:notice] = 'Order has been Confrimed'
     redirect_to root_path
   end
@@ -23,7 +27,7 @@ class OrdersController < ApplicationController
   def edit; end
 
   def update
-    flash[:notice] = 'Order was successfully updated' if @order.update(order_params)
+    flash[:notice] = 'Order was successfully updated' if @order.update(order_params_update)
     redirect_to orders_path
   end
 end

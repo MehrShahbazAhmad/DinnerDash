@@ -1,5 +1,4 @@
 <tr>
-  <td><%= order.id %></td>
   <td><%= order.order_items.count %></td>
   <td><%= order.status.titleize %></td>
   <td>$<%= calculate_total(order.order_items) %></td>

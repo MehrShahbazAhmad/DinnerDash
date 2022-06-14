@@ -9,6 +9,10 @@ class OrderPolicy < ApplicationPolicy
     check_user
   end
 
+  def create?
+    check_user
+  end
+
   def show?
     check_user
   end
