@@ -8,7 +8,7 @@ module CartItemsConcern
   end
 
   def find_item
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id]) if user_signed_in?
   end
 
   def cart
@@ -16,7 +16,7 @@ module CartItemsConcern
   end
 
   def cart_item
-    @cart_item = @cart.cart_items.find_by(item_id: @item.id)
+    @cart_item = @cart.cart_items.find_by(item_id: @item.id) if user_signed_in?
   end
 
   def quantity_increment
@@ -38,5 +38,24 @@ module CartItemsConcern
   def quantity_decrement
     @cart_item.quantity -= 1
     flash[:notice] = "#{@item.title} quantity decremented in Cart"
+  end
+
+  def quantity_increment_guest
+    id = params[:item_id].to_i
+    flash[:notice] = 'Item added in Cart'
+    session[:cart_id] << id
+  end
+
+  def quantity_decrement_guest
+    id = params[:item_id].to_i
+    index = session[:cart_id].find_index(id)
+    flash[:notice] = 'Item Quantity decremented in Cart'
+    session[:cart_id].delete_at(index)
+  end
+
+  def remove_item_guest
+    id = params[:item_id].to_i
+    session[:cart_id].delete(id)
+    flash[:notice] = 'Item removed from the Cart'
   end
 end

@@ -7,7 +7,7 @@
         <%= image_tag('defult.jpeg', alt: "Item Image", class: "Card image cap", size: "287x200") %>
       <% end %>
       <div class="card-body">
-        <h5 class="card-title"><%= item.title %></h5>
+        <h5 class="card-title"><strong><%= item.title %></strong></h5>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">$ <%= item.price %></li>
@@ -20,7 +20,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <% item.categories.each do |x| %>
-                <a class="dropdown-item" href="#"><%= x.title %></a>
+                <p class="dropdown-item"><%= x.title %></p>
               <% end %>
             </div>
           </div>

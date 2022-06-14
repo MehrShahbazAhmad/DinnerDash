@@ -7,10 +7,10 @@ module ApplicationsConcern
     if user_signed_in?
       @current_cart = find_cart
       @current_cart ||= new_cart unless @current_cart
+      session[:cart_id] = @current_cart.id
     else
-      @current_cart = Cart.new
+      session[:cart_id] ||= []
     end
-    session[:cart_id] = @current_cart.id
   end
 
   def find_cart
@@ -21,6 +21,18 @@ module ApplicationsConcern
     @current_cart = Cart.new
     @current_cart.user_id = current_user.id
     @current_cart.save
+    fill_in_cart unless session[:cart_id].empty?
     @current_cart
+  end
+
+  def fill_in_cart
+    t = session[:cart_id].uniq
+    t.each do |item|
+      cart_item = CartItem.new
+      cart_item.cart = @current_cart
+      cart_item.item = Item.find(item)
+      cart_item.quantity = session[:cart_id].count(item)
+      cart_item.save
+    end
   end
 end
