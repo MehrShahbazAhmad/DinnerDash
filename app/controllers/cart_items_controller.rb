@@ -16,7 +16,7 @@ class CartItemsController < ApplicationController
     else
       quantity_increment_guest
     end
-    redirect_to carts_path(@cart)
+    redirect_back(fallback_location: root_path)
   end
 
   def reduce_quantity

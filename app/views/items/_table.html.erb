@@ -28,22 +28,14 @@
       </td>
     </tr>
     <tr>
-      <td colspan="1"></td>
+      <td colspan="1">Categories</td>
       <td colspan="2 align-center">
         <ul class="list-group">
-          <div class="dropdown">
-            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Categories
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <% item.categories.each do |x| %>
-                <a class="dropdown-item" href="#">
-                  <%= x.title %>
-                </a>
-                <% end %>
-            </div>
-          </div>
+          <li class="list-group-item">
+            <ul class="list-inline">
+              <%= render partial: "category", collection: item.categories %>
+            </ul>
+          </li>
         </ul>
       </td>
     </tr>

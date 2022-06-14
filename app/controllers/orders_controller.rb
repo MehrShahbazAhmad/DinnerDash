@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   include OrdersConcern
   before_action :find_order, only: %i[show edit update]
   before_action :all_orders, only: [:index]
+
   def index
     filter_order
   end

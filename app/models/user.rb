@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_one :cart, dependent: :destroy
   has_many :orders, dependent: :destroy
 
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :user_name, uniqueness: { case_sensitive: false }, length: { minimum: 2, maximum: 32 }, allow_blank: true

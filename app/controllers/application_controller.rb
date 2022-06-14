@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::RoutingError, with: :render404
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized_error
+
   def render404
     redirect_to(request.referer || root_path)
   end
