@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       flash[:notice] = 'Item was successfully updated'
-      @restaurant = Restaurant.find(params.require(:item)[:restaurant_id])
+      @restaurant = Restaurant.find_by(params[:restaurant_id])
       redirect_to restaurant_path(@restaurant)
     else
       render 'edit'
