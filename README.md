@@ -47,6 +47,10 @@ Install Gems
 ``` sh
 bundle
 ```
+Run DB Build
+```
+rails db:create
+```
 Run Server
 ```
 rails s
