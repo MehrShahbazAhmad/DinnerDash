@@ -2,6 +2,7 @@
 
 class CategoriesController < ApplicationController
   before_action :find_category, except: %i[index new create]
+
   def index
     @categories = Category.all
     authorize @categories

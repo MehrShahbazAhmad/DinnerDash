@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show edit destroy update]
   before_action :find_restaurant, only: %i[edit new]
   before_action :top_three_items, only: %i[top_items]
+  before_action :check_categories, only: %i[create]
 
   def index
     if params[:search].blank?
@@ -30,19 +31,14 @@ class ItemsController < ApplicationController
   end
 
   def create
-    if check_categories
-      @item = Item.new(item_params)
-      authorize @item
-      if @item.save
-        flash[:notice] = 'Item was successfully created'
-        redirect_to restaurant_path(@restaurant)
-        create_links
-      else
-        render 'new'
-      end
+    @item = Item.new(item_params)
+    authorize @item
+    if @item.save
+      flash[:notice] = 'Item was successfully created'
+      redirect_to restaurant_path(@restaurant)
+      create_links
     else
-      flash[:notice] = 'Atleast one category required'
-      redirect_to new_item_path(restaurant_id: @restaurant)
+      render 'new'
     end
   end
 

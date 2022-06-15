@@ -30,7 +30,10 @@ module ItemsConcern
   def check_categories
     @category = params.require(:item)[:categories]
     @restaurant = Restaurant.find(params.require(:item)[:restaurant_id])
-    @category.present?
+    if @category.blank?
+      flash[:notice] = 'Atleast one category required'
+      redirect_to new_item_path(restaurant_id: @restaurant)
+    end
   end
 
   def create_links
