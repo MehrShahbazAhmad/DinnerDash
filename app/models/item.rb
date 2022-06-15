@@ -31,6 +31,6 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :price, numericality: { greater_than: 0, less_than: BigDecimal(10**3) }
 
-  scope :search, ->(search) { where('lower(title) LIKE ?', search) }
+  scope :search, ->(search) { where('lower(title) LIKE ?', "%#{search}%") }
   scope :sort_by_title, -> { order(title: :asc) }
 end

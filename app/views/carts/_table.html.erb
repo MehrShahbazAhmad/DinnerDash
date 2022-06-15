@@ -17,17 +17,7 @@
           <td><strong>No Items At the moment</strong></td>
         </tr>
       <% else %>
-        <% cart.cart_items.each do |cart_item| %>
-          <tr>
-            <td><%= cart_item.item.title %></td>
-            <td>$<%= cart_item.item.price %></td>
-            <td><%= cart_item.quantity %></td>
-            <td><%= button_to '+', add_quantity_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
-            <td><%= button_to '-', reduce_quantity_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
-            <td><%= button_to 'Remove', remove_item_carts_cart_items_path(item_id: cart_item.item.id), class:"btn btn-dark" %></td>
-            <td>$<%= calculate_item_total(cart_item) %></td>
-          </tr>
-        <% end %>
+        <%= render partial: "cart_item", collection: cart.cart_items %>
       <% end %>
     </tbody>
     <tfoot>
