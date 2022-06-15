@@ -11,10 +11,10 @@ class ItemsController < ApplicationController
 
   def index
     if params[:search].blank?
-      @items = Item.all.order(:title)
+      @items = Item.sort_by_title
     else
       @parameters = params[:search].downcase
-      @items = Item.all.where('lower(title) LIKE ?', "%#{@parameters}%")
+      @items = Item.search(@parameters)
       count_items
     end
   end

@@ -47,6 +47,6 @@ module ItemsConcern
 
   def count_items
     flash[:notice] = "No Itme found for #{@parameters}" if @items.count.zero?
-    redirect_to root_path if @items.count.zero?
+    redirect_back(fallback_location: root_path) if @items.count.zero?
   end
 end
