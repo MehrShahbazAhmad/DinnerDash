@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :items do
     get :top_items, on: :collection
   end
+
   resources :restaurants
 
   resources :categories do

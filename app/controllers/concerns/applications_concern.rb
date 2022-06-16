@@ -14,25 +14,26 @@ module ApplicationsConcern
   end
 
   def find_cart
-    @cart = Cart.find_by(user_id: current_user.id)
+    Cart.find_by(user_id: current_user.id)
   end
 
   def new_cart
-    @current_cart = Cart.new
-    @current_cart.user_id = current_user.id
-    @current_cart.save
+    @current_cart = Cart.create(user_id: current_user.id)
     fill_in_cart unless session[:cart_id].empty?
     @current_cart
   end
 
   def fill_in_cart
-    t = session[:cart_id].uniq
-    t.each do |item|
-      cart_item = CartItem.new
-      cart_item.cart = @current_cart
-      cart_item.item = Item.find(item)
-      cart_item.quantity = session[:cart_id].count(item)
-      cart_item.save
+    CartItem.create(hash_of_cart_items)
+  end
+
+  def hash_of_cart_items
+    session[:cart_id].uniq.map do |item|
+      { item_id: item, quantity: count_items(item), cart_id: @current_cart }
     end
+  end
+
+  def count_items(id)
+    session[:cart_id].count(id)
   end
 end

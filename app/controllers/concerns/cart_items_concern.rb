@@ -16,28 +16,33 @@ module CartItemsConcern
   end
 
   def cart_item
-    @cart_item = @cart.cart_items.find_by(item_id: @item.id) if user_signed_in?
+    @cart_item = @current_cart.cart_items.find_by(item_id: @item.id) if user_signed_in?
   end
 
   def quantity_increment
-    if @cart_item.quantity >= 10
-      flash[:notice] = 'Item quantity cannot be greater than 10'
-    else
-      @cart_item.quantity += 1
-      flash[:notice] = "#{@item.title} quantity incremented in Cart"
-    end
+    @cart_item.quantity += 1
+    @cart_item.save
+    flash[:notice] = "#{@item.title} quantity incremented in Cart"
   end
 
   def add_item
-    @cart_item = CartItem.new
-    @cart_item.cart = @current_cart
-    @cart_item.item = @item
-    flash[:notice] = "#{@item.title} added in Cart"
+    if @cart.items.include?(@item)
+      quantity_increment
+    else
+      CartItem.create(item_id: @item.id, cart_id: @cart.id)
+      flash[:notice] = "#{@item.title} added in Cart"
+    end
   end
 
   def quantity_decrement
-    @cart_item.quantity -= 1
-    flash[:notice] = "#{@item.title} quantity decremented in Cart"
+    if @cart_item.quantity == 1
+      @cart_item.destroy
+      flash[:notice] = "#{@item.title} removed from the Cart"
+    else
+      @cart_item.quantity -= 1
+      @cart_item.save
+      flash[:notice] = "#{@item.title} quantity decremented in Cart"
+    end
   end
 
   def quantity_increment_guest

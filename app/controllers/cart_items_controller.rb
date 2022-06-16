@@ -7,12 +7,7 @@ class CartItemsController < ApplicationController
 
   def add_quantity
     if user_signed_in?
-      if @cart.items.include?(@item)
-        quantity_increment
-      else
-        add_item
-      end
-      @cart_item.save
+      add_item
     else
       quantity_increment_guest
     end
@@ -21,13 +16,7 @@ class CartItemsController < ApplicationController
 
   def reduce_quantity
     if user_signed_in?
-      if @cart_item.quantity == 1
-        @cart_item.destroy
-        flash[:notice] = "#{@item.title} Removed from the Cart"
-      else
-        quantity_decrement
-      end
-      @cart_item.save
+      quantity_decrement
     else
       quantity_decrement_guest
     end

@@ -3,20 +3,12 @@
 module ItemsConcern
   extend ActiveSupport::Concern
 
-  def item_params
-    params.require(:item).permit(:title, :description, :price, :status, images: [])
-  end
-
   def categories
     @categories = Category.all
   end
 
   def find_category_item
     @item = Item.find(params[:id])
-  end
-
-  def find_restaurant
-    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
   def find_item
@@ -28,7 +20,7 @@ module ItemsConcern
   end
 
   def check_categories
-    @category = params.require(:item)[:categories]
+    category_ids
     @restaurant = Restaurant.find_by(params[:restaurant_id])
     if @category.blank?
       flash[:notice] = 'Atleast one category required'
@@ -37,8 +29,8 @@ module ItemsConcern
   end
 
   def create_links
+    category_ids
     RestaurantItem.create(item_id: @item.id, restaurant_id: @restaurant.id)
-    @category_ids = params.require(:item)[:categories]
     @category_ids.each do |category_id|
       CategoryItem.create(item_id: @item.id, category_id: category_id)
     end
@@ -51,5 +43,13 @@ module ItemsConcern
   def count_items
     flash[:notice] = "No Itme found for #{@parameters}" if @items.count.zero?
     redirect_back(fallback_location: root_path) if @items.count.zero?
+  end
+
+  def category_ids
+    @categories = params.require(:item).permit(:categories)
+  end
+
+  def find_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 end

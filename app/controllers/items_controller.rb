@@ -79,4 +79,10 @@ class ItemsController < ApplicationController
   end
 
   def top_items; end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:title, :description, :price, :status, images: [])
+  end
 end
