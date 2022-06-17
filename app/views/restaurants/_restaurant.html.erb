@@ -1,9 +1,11 @@
 
 <tr>
   <td><%= restaurant.title %></td>
-  <td><%= restaurant.items.count %></td>
-  <td><%= link_to 'Show Restaurant', restaurant_path(restaurant), class:"btn btn-dark" %></td>
-  <td><%= link_to 'Edit Restaurant', edit_restaurant_path(restaurant), class:"btn btn-dark" %></td>
-  <td><%= link_to 'Delete Restaurant', restaurant, method: :delete,
-  data: { confirm: 'Are you sure?' } , class:"btn btn-dark" %></td>
+  <td><%= link_to 'Show Items', restaurant_path(restaurant), class:"btn btn-dark" %></td>
+  <% if current_user.admin? %>
+    <td><%= restaurant.items.count %></td>
+    <td><%= link_to 'Edit Restaurant', edit_restaurant_path(restaurant), class:"btn btn-dark" %></td>
+    <td><%= link_to 'Delete Restaurant', restaurant, method: :delete,
+    data: { confirm: 'Are you sure?' } , class:"btn btn-dark" %></td>
+  <% end %>
 </tr>

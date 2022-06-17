@@ -1,34 +1,36 @@
 <div class="container">
-  <div class = "table-wrapper-scroll-y my-custom-scrollbar">
-    <table class="table scroll">
-      <thead class="thead-dark">
-        <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Price</th>
+  <table class="table text-center">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <% if current_user.admin? %>
           <th>Status</th>
           <th>Drop</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% if category.items.count == 0%>
+        <tr>
+          <td class="colspan-4"><strong>No Items At the moment</strong></td>
         </tr>
-      </thead>
-      <tbody>
-        <% if category.items.count == 0%>
+      <% else %>
+        <% category.items.each_with_index do |item, index| %>
           <tr>
-            <td class="colspan-4"><strong>No Items At the moment</strong></td>
-          </tr>
-        <% else %>
-          <% category.items.each_with_index do |item, index| %>
-            <tr>
-              <td><%= index+1 %></td>
-              <td><%= item.title %></td>
-              <td><%= item.description %></td>
-              <td>$<%= item.price %></td>
+            <td><%= index+1 %></td>
+            <td><%= item.title %></td>
+            <td><%= item.description %></td>
+            <td>$<%= item.price %></td>
+            <% if current_user.admin? %>
               <td><%= item.status %></td>
               <td><%= link_to 'Remove', delete_item_category_item_path(category.id, item.id), method: 'delete', class:"btn btn-dark"%></td>
-            </tr>
-          <% end %>
+            <% end %>
+          </tr>
         <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    </tbody>
+  </table>
 </div>

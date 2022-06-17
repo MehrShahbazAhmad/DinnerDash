@@ -1,13 +1,15 @@
 <div class="container">
   <h1>Categories</h1>
-  <table class="table">
+  <table class="table text-center">
     <thead class="thead-dark">
       <tr>
         <th>Title</th>
-        <th>No of Items</th>
         <th>Show</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <% if current_user.admin? %>
+          <th>No of Items</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -15,5 +17,8 @@
     </tbody>
   </table>
 
-  <%= link_to 'New Category', new_category_path, class:"btn btn-dark"%>
+  <%= link_to 'Back', root_path, class:"btn btn-dark"%>
+  <% if current_user.admin? %>
+    <%= link_to 'New Category', new_category_path, class:"btn btn-dark"%>
+  <% end %>
 </div>

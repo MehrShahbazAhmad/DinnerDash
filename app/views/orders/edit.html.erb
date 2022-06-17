@@ -1,0 +1,4 @@
+<h2>Status: <%= @order.status.titleize %></h2>
+<%= render 'table', order: @order %>
+<%= render 'form', order: @order %>
+<%= link_to 'Back', orders_path, class:"btn btn-dark"%>

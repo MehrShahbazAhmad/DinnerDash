@@ -1,0 +1,10 @@
+<tr>
+  <td><%= order.order_items.count %></td>
+  <td><%= order.status.titleize %></td>
+  <td>$<%= calculate_total(order.order_items) %></td>
+  <% if current_user.admin? %>
+    <td><%= order.user_id %></td>
+    <td><%= link_to 'Edit Order', edit_order_path(order), class:"btn btn-dark" %></td>
+  <% end %>
+  <td><%= link_to 'Show Order', order_path(order), class:"btn btn-dark" %></td>
+</tr>

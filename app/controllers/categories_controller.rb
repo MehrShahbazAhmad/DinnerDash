@@ -2,12 +2,15 @@
 
 class CategoriesController < ApplicationController
   before_action :find_category, except: %i[index new create]
+
   def index
     @categories = Category.all
+    authorize @categories
   end
 
   def new
     @category = Category.new
+    authorize @category
   end
 
   def show
@@ -15,7 +18,8 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.create(category_params)
+    @category = Category.new(category_params)
+    authorize @category
     if @category.save
       flash[:notice] = 'Category was successfully created'
       redirect_to categories_path
@@ -48,7 +52,6 @@ class CategoriesController < ApplicationController
 
   def find_category
     @category = Category.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    redirect_to categories_path, notice: e.message
+    authorize @category
   end
 end

@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col"></div>
+  <div class="col-6">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="text-muted">Your cart</span>
+      <span class="badge badge-secondary badge-pill"><%= @current_cart.cart_items.count %></span>
+    </h4>
+    <table class="table table-hover border">
+      <thead>
+        <tr>
+          <th class="border">Title</th>
+          <th class="border">Price</th>
+          <th class="border">Quantity</th>
+          <th class="border">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @current_cart.cart_items.each do |cart_item| %>
+          <tr>
+            <td class="border"><%= cart_item.item.title %></td>
+            <td class="border">$<%= cart_item.item.price %></td>
+            <td class="border"><%= cart_item.quantity %></td>
+            <td class="border">$<%= calculate_item_total(cart_item) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="border">Total</td>
+          <td class="border">$<%= calculate_total(@current_cart.cart_items) %></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="col"></div>
+</div>

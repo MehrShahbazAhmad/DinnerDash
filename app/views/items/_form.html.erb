@@ -1,4 +1,4 @@
-<%= form_with(model: [restaurant, restaurant.items.build], local: true) do |form| %>
+<%= form_with(model: @item, local: true) do |form| %>
 
   <% if @item.errors.any? %>
     <div id="error_explanation">
@@ -25,12 +25,12 @@
   </div>
 
   <div class="field form-group pb-2">
-    <%= form.number_field :price, step: 0.01, class:"input form-control", placeholder: 'Price', required: true, min: 0.01 %>
+    <%= form.number_field :price, step: 0.01, class:"input form-control", placeholder: 'Price', min: 0.01, required: true %>
   </div>
 
   <h4>Status:</h4>
   <div class="field form-check pb-2">
-    <%= form.radio_button :status, 'active', :checked => true, class: "form-check-input" %> Active <br>
+    <%= form.radio_button :status, 'active', checked: true, class: "form-check-input" %> Active <br>
     <%= form.radio_button :status, 'closed', class: "form-check-input"%> Closed
   </div>
 
@@ -42,11 +42,13 @@
 
     <h4>Categories:</h4>
     <div class="field form-check pb-2">
-      <% category.each do |x| %>
+      <% categories.each do |x| %>
         <%= form.check_box :categories, { :multiple => true }, x.id, nil %> <%= x.title %> <br>
       <% end %>
     </div>
   <% end %>
+
+  <%= form.hidden_field :restaurant_id, value: restaurant.id %>
 
   <div class="actions">
     <%= form.submit class:"btn btn-dark " %>

@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table text-center">
+    <thead class="thead-dark">
+      <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Show</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% order.order_items.each do |order_item| %>
+        <tr>
+          <td><%= order_item.item.title.titleize %></td>
+          <td>$<%= order_item.item.price %></td>
+          <td><%= link_to 'Show Item', item_path(order_item.item), class:"btn btn-dark" %></td>
+          <td><%= order_item.quantity %></td>
+          <td>$<%= calculate_item_total(order_item) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        <strong>Total</strong>
+      </td>
+      <td>$<%= calculate_total(order.order_items) %></td>
+    </tfoot>
+  </table>
+</div>
