@@ -3,7 +3,7 @@
   <div class="col-6">
     <h4 class="d-flex justify-content-between align-items-center mb-3">
       <span class="text-muted">Your cart</span>
-      <span class="badge badge-secondary badge-pill"><%= @cart.cart_items.count %></span>
+      <span class="badge badge-secondary badge-pill"><%= @current_cart.cart_items.count %></span>
     </h4>
     <table class="table table-hover border">
       <thead>
@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @cart.cart_items.each do |cart_item| %>
+        <% @current_cart.cart_items.each do |cart_item| %>
           <tr>
             <td class="border"><%= cart_item.item.title %></td>
             <td class="border">$<%= cart_item.item.price %></td>
@@ -29,7 +29,7 @@
           <td></td>
           <td></td>
           <td class="border">Total</td>
-          <td class="border">$<%= calculate_total(@cart.cart_items) %></td>
+          <td class="border">$<%= calculate_total(@current_cart.cart_items) %></td>
         </tr>
       </tfoot>
     </table>
