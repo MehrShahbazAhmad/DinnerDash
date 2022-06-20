@@ -20,7 +20,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-# User Model
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

@@ -11,6 +11,7 @@
 #  status      :integer          default("active"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  order_count :integer          default(0)
 #
 class Item < ApplicationRecord
   has_many_attached :images
