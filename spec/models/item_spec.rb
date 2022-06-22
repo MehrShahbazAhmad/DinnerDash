@@ -3,15 +3,21 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  it 'is not valid without a attributes' do
-    expect(described_class.create).not_to be_valid
+  context 'Validations Test' do
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:description) }
+    it { should validate_presence_of(:price) }
+    it { should validate_numericality_of(:price) }
+    it { should define_enum_for(:status) }
   end
 
-  it 'is valid with a attributes' do
-    expect(described_class.create(title: 'foo', description: 'foo bar', price: 0.22)).to be_valid
-  end
-
-  it 'is not valid with a nil' do
-    expect(described_class.create(title: nil, description: nil, price: nil)).not_to be_valid
+  context 'Associations Test' do
+    it { should have_many_attached(:images) }
+    it { should have_many(:restaurant_items) }
+    it { should have_many(:restaurants) }
+    it { should have_many(:category_items) }
+    it { should have_many(:categories) }
+    it { should have_many(:cart_items) }
+    it { should have_many(:order_items) }
   end
 end

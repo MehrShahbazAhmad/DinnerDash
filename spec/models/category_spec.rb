@@ -3,11 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  it 'is not valid without a title' do
-    expect(described_class.create).not_to be_valid
+  context 'Validations Test' do
+    it { should validate_presence_of(:title) }
   end
 
-  it 'is valid with a title' do
-    expect(described_class.create(title: 'foo')).to be_valid
+  context 'Associations Test' do
+    it { should have_many(:category_items) }
+    it { should have_many(:items) }
   end
 end

@@ -30,7 +30,7 @@ class Item < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true
-  validates :price, numericality: { greater_than: 0, less_than: BigDecimal(10**3) }
+  validates :price, presence: true, numericality: { greater_than: 0, less_than: BigDecimal(10**3) }
 
   scope :search, ->(search) { where('lower(title) LIKE ?', "%#{search}%") }
   scope :sort_by_title, -> { order(title: :asc) }

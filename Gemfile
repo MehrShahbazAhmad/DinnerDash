@@ -46,6 +46,7 @@ group :development, :test do
   gem 'rubocop-rspec' # or gem 'rubocop-rspec' depending on your test suite
 
   gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
 end
 
 # Use ActiveStorage variant
@@ -84,6 +85,8 @@ group :test do
 
   gem 'rspec-rails'
 end
+
+gem 'simplecov', require: false, group: :test
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
