@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   context 'Validations Test' do
-    it { should define_enum_for(:status) }
+    it { is_expected.to define_enum_for(:status) }
   end
 
   context 'Associations Test' do
-    it { should have_many(:order_items) }
-    it { should have_many(:items) }
-    it { should belong_to(:user) }
+    it { is_expected.to have_many(:order_items) }
+    it { is_expected.to have_many(:items) }
+    it { is_expected.to belong_to(:user) }
   end
 end
