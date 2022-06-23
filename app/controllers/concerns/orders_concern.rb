@@ -18,11 +18,11 @@ module OrdersConcern
 
   def create_order
     create_order_items
-    @cart.cart_items.each(&:destroy)
+    @current_cart.cart_items.each(&:destroy)
   end
 
   def create_order_items
-    @cart.cart_items.each do |cart_item|
+    @current_cart.cart_items.each do |cart_item|
       @order.order_items.create(item_id: cart_item.item.id, order_id: @order.id, quantity: cart_item.quantity)
       cart_item.item.order_count += 1
       cart_item.item.save
