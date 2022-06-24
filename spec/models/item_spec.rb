@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  context 'Validations Test' do
+  context 'when Validations Test' do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to validate_presence_of(:price) }
@@ -11,7 +11,7 @@ RSpec.describe Item, type: :model do
     it { is_expected.to define_enum_for(:status) }
   end
 
-  context 'Associations Test' do
+  context 'when Associations Test' do
     it { is_expected.to have_many_attached(:images) }
     it { is_expected.to have_many(:restaurant_items) }
     it { is_expected.to have_many(:restaurants) }

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context 'Validations Test' do
+  context 'when Validations Test' do
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_presence_of(:first_name) }
     it { is_expected.to validate_presence_of(:last_name) }
@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to define_enum_for(:status) }
   end
 
-  context 'Associations Test' do
+  context 'when Associations Test' do
     it { is_expected.to have_many(:orders) }
     it { is_expected.to have_one(:cart) }
   end
