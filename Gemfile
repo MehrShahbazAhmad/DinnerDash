@@ -46,6 +46,8 @@ group :development, :test do
   gem 'rubocop-rspec' # or gem 'rubocop-rspec' depending on your test suite
 
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'rubocop-faker'
   gem 'shoulda-matchers'
 end
 

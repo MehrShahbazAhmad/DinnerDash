@@ -2,6 +2,7 @@ require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec # or rubocop-minitest
+  - rubocop-faker
 
 
 AllCops:
@@ -13,6 +14,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'vendor/bundle/**/*'
     - 'bin/**/*'
+    - 'spec/**'
 
 Layout/LineLength:
   Max: 120

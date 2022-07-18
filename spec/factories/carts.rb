@@ -2,6 +2,8 @@
 
 FactoryBot.define do
   factory :cart do
-    user { FactoryBot.build(:user) }
+    association :user
+    # user { FactoryBot.build(:user) }
+    # items { build_list(:item, 4) }
   end
 end
