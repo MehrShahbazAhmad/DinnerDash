@@ -12,7 +12,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">$ <%= item.price %></li>
         <li class="list-group-item"><%= item.description %></li>
-        <li class="list-group-item"><%= item.restaurants.first.title %></li>
+        <li class="list-group-item"><%#= item.restaurants.first.title %></li>
         <li class="list-group-item">
           <ul class="list-inline">
             <%= render partial: "category", collection: item.categories %>

@@ -2,13 +2,11 @@
 
 class ItemsController < ApplicationController
   include ItemsConcern
-  before_action :categories, only: %i[new edit create]
+  before_action :categories, only: %i[new]
   before_action :find_category_item, only: %i[add_item delete_item]
   before_action :find_category, only: %i[add_item delete_item]
   before_action :find_item, only: %i[show edit destroy update]
   before_action :find_restaurant, only: %i[edit new]
-  before_action :top_three_items, only: %i[top_items]
-  before_action :check_categories, only: %i[create]
 
   def index
     if params[:search].blank?
@@ -35,8 +33,7 @@ class ItemsController < ApplicationController
     authorize @item
     if @item.save
       flash[:notice] = 'Item was successfully created'
-      redirect_to restaurant_path(@restaurant)
-      create_links
+      redirect_to root_path
     else
       render 'new'
     end
@@ -69,12 +66,8 @@ class ItemsController < ApplicationController
   end
 
   def delete_item
-    if @item.categories.count == 1
-      flash[:notice] = "Atleast one category required for #{@item.title}"
-    else
-      @category.items.destroy(@item)
-      flash[:notice] = "#{@item.title} has been removed"
-    end
+    @category.items.destroy(@item)
+    flash[:notice] = "#{@item.title} has been removed"
     redirect_to category_path(@category)
   end
 

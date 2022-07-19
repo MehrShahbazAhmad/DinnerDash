@@ -2,7 +2,7 @@
 
 class ItemPolicy < ApplicationPolicy
   def create?
-    check_admin
+    true
   end
 
   def new?
@@ -18,7 +18,7 @@ class ItemPolicy < ApplicationPolicy
   end
 
   def destroy?
-    check_admin
+    true
   end
 
   private
