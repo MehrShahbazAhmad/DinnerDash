@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe ItemsController, type: :controller do
-  let(:items) { create_list :item, 3 }
-
   let(:item) { FactoryBot.create(:item) }
 
   let(:user) { create(:user) }
@@ -17,68 +15,85 @@ RSpec.describe ItemsController, type: :controller do
 
   before do
     request.env['HTTP_REFERER'] = 'where_i_came_from'
-    @request.env['devise.mappings'] = Devise.mappings[:user]
+    request.env['devise.mappings'] = Devise.mappings[:user]
     sign_in user
     session[:cart_id] = []
   end
 
   describe 'GET /items' do
-    it 'items index' do
+    it 'tests the status of index method of the items' do
       get :index
-      expect(response).to have_http_status(:ok)
       expect(response).to render_template('index')
     end
-  end
 
-  describe 'GET /items' do
-    it 'items index with search params' do
+    it 'tests the status of index method of the items with Search' do
       get :index, params: { search: 'B' }
       expect(response).to redirect_to('where_i_came_from')
     end
   end
 
   describe 'GET /item/id' do
-    it 'Item Show' do
+    it 'tests the status of show method of the item' do
       get :show, params: { id: item.id }
-      expect(response).to have_http_status(:ok)
       expect(response).to render_template('show')
     end
   end
 
   describe 'GET /item/new' do
-    it 'Item New' do
+    it 'tests the status of new method of the item' do
       get :new, params: { restaurant_id: restaurant.id }
+      expect(response).to render_template('new')
     end
   end
 
-  describe 'GET /item/new' do
-    it 'Item Edit' do
+  describe 'GET /item/edit' do
+    it 'tests the status of edit method of the item' do
       get :edit, params: { restaurant_id: restaurant.id, id: item.id }
     end
   end
 
   describe 'POST /item/create' do
-    it 'Item Create' do
+    it 'tests the status of create method of the item' do
       post :create,
-           params: { item: { title: Faker::Name.unique.name, description: Faker::Lorem.sentence(word_count: 1), price: 6.5,
-                             categories: category.id, restaurant_id: restaurant.id, pictures: [fixture_file_upload(Rails.root.join('app/assets/images/defult.jpeg'), 'image/jpeg')] } }
+           params: { item: { title: Faker::Name.unique.name, description: Faker::Lorem.sentence(word_count: 1),
+                             price: 6.5, categories: category.id, restaurant_id: restaurant.id,
+                             pictures: [fixture_file_upload(Rails.root.join('app/assets/images/defult.jpeg'),
+                                                            'image/jpeg')] } }
       expect(item).to be_valid
+    end
+
+    it 'tests the faliure of new method of the item' do
+      post :create,
+           params: { item: { description: Faker::Lorem.sentence(word_count: 1), price: 6.5,
+                             categories: category.id, restaurant_id: restaurant.id,
+                             pictures: [fixture_file_upload(Rails.root.join('app/assets/images/defult.jpeg'),
+                                                            'image/jpeg')] } }
+      expect(response).to render_template('new')
     end
   end
 
   describe 'PATCH /item/id' do
-    it 'Item Update' do
+    it 'tests the status of update method of the item' do
       patch :update,
             params: { id: item.id,
                       item: { title: 'Changed 1', description: 'is Changed by the Tester', price: 5.5, status: 'closed',
                               restaurant_id: item.restaurants.first.id } }
       expect(item).to be_valid
     end
+
+    it 'tests the faliure of update method of the item' do
+      patch :update,
+            params: { id: item.id,
+                      item: { title: '', description: '', price: 5.5585, status: 'closed',
+                              restaurant_id: item.restaurants.first.id } }
+      expect(response).to render_template('edit')
+    end
   end
 
   describe 'DELETE /item/id' do
-    it 'Item Delete' do
+    it 'tests the status of destroy method of the item' do
       delete :destroy, params: { id: item.id }
+      expect(response).to redirect_to(root_path)
     end
   end
 
