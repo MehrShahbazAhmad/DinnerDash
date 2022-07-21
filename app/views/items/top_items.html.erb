@@ -1,0 +1,7 @@
+<h1 class="text-center">Most Ordered Items</h1>
+<div class="row text-center">
+  <% @items.each do |item| %>
+    <%= render 'item', item: item %>
+  <% end %>
+</div>
+<%= link_to 'Back' , root_path, class:"btn btn-dark"%>

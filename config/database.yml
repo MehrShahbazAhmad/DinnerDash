@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+
+
+development:
+  <<: *default
+  database: dinnerdash_development
+  host: localhost
+  port: 5432
+  username: dev
+  password: 12345
+
+test:
+  <<: *default
+  database: dinnerdash_test
+  host: localhost
+  port: 5432
+  username: dev
+  password: 12345
+
+production:
+  <<: *default
+  database: dinnerdash_production

@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: shahbazdevsinc
+  api_key: '825578269951939'
+  api_secret: 221jmG6Bkul15SmbzTkJnxtg6g8
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: shahbazdevsinc
+  api_key: '825578269951939'
+  api_secret: 221jmG6Bkul15SmbzTkJnxtg6g8
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: shahbazdevsinc
+  api_key: '825578269951939'
+  api_secret: 221jmG6Bkul15SmbzTkJnxtg6g8
+  enhance_image_tag: true
+  static_file_support: false

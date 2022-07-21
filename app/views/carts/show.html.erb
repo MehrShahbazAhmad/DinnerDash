@@ -1,0 +1,18 @@
+<h2>Cart</h2>
+<% if user_signed_in? %>
+  <%= render 'table', cart: @cart %>
+  <%= link_to 'Back', root_path, class:"btn btn-dark"%>
+  <% if @cart.cart_items.count != 0 %>
+    <%= link_to 'Check Out', new_order_path, class:"btn btn-dark"%>
+  <% end %>
+<% else %>
+  <%= render 'table2', cart: @cart %>
+  <div class="row pt-3">
+    <div class="col-sm-2h pt-2">
+      <p><strong>Sign Up / In to Checkout</strong></p>
+    </div>
+    <div class="col-sm-2">
+      <%= link_to 'Sign In', new_user_session_path, class: "btn btn-dark" %>
+    </div>
+  </div>
+<% end %>

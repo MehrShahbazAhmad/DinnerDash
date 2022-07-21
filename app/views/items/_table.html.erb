@@ -1,0 +1,43 @@
+<table class="table table-bordered">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Title</td>
+      <td colspan="2">
+        <strong>
+          <%= item.title %>
+        </strong></td>
+    </tr>
+    <tr>
+      <td>Price $</td>
+      <td colspan="2">
+        <%= item.price %>
+      </td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td colspan="2">
+        <%= item.description %>
+      </td>
+    </tr>
+    <tr>
+      <td>Restaurant</td>
+      <td colspan="2">
+        <%= item.restaurants.first.title %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1">Categories</td>
+      <td colspan="2 align-center">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <ul class="list-inline">
+              <%= render partial: "category", collection: item.categories %>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

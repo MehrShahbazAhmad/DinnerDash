@@ -1,0 +1,8 @@
+<div class="container">
+  <h1><%= @restaurant.title %></h1>
+  <%= render 'table', restaurant: @restaurant %>
+  <% if current_user.admin? %>
+    <%= link_to 'New Item', new_item_path(restaurant_id: @restaurant.id), class:"btn btn-dark"%>
+  <% end %>
+  <%= link_to 'Back', restaurants_path, class:"btn btn-dark"%>
+</div>

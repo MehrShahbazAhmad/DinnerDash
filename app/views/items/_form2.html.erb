@@ -1,0 +1,42 @@
+<%= form_with(model: @item, local: true) do |form| %>
+
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize( @item.errors.count, "error" ) %> prohibited this Item from being saved:
+      </h2>
+
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group pb-2">
+    <%= form.text_field :title, class:"form-control", placeholder: 'Title', required: true %>
+  </div>
+
+  <div class="field form-group pb-2">
+    <%= form.text_field :description, class:"form-control", placeholder: 'Description', required: true %>
+  </div>
+
+  <div class="field form-group pb-2">
+    <%= form.number_field :price, step: 0.01, class:"input form-control", placeholder: 'Price', min: 0.01, required: true %>
+  </div>
+
+  <h4>Status:</h4>
+  <div class="field form-check pb-2">
+    <%= form.radio_button :status, 'active', checked: true, class: "form-check-input" %> Active <br>
+    <%= form.radio_button :status, 'closed', class: "form-check-input"%> Closed
+  </div>
+
+  <%= form.hidden_field :restaurant_id, value: restaurant.id %>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-dark " %>
+  </div>
+<% end %>

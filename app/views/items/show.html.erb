@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <%= render 'carousel', item: @item %>
+    </div>
+    <div class="col-4">
+      <%= render 'table', item: @item %>
+      <%= link_to 'Back' , root_path, class:"btn btn-dark"%>
+      <div class="btn-group">
+        <% unless user_signed_in? && current_user.admin? %>
+          <%= button_to "Add to cart", add_quantity_carts_cart_items_path(item_id: @item.id), class:"btn btn-dark" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

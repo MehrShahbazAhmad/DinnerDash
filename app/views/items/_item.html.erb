@@ -1,0 +1,32 @@
+<% if item.active? %>
+  <div class="col-sm mb-4">
+    <div class="card" style="width: 18rem;">
+      <% if item.images.present? %>
+        <%= image_tag(item.images.first, alt: "Item Image", class: "Card image cap", size: "287x200") %>
+      <% else %>
+        <%= image_tag('defult.jpeg', alt: "Item Image", class: "Card image cap", size: "287x200") %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><strong><%= item.title %></strong></h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">$ <%= item.price %></li>
+        <li class="list-group-item"><%= item.description %></li>
+        <li class="list-group-item"><%= item.restaurants.first.title %></li>
+        <li class="list-group-item">
+          <ul class="list-inline">
+            <%= render partial: "category", collection: item.categories %>
+          </ul>
+        </li>
+      </ul>
+      <div class="card-body">
+        <div class="btn-group">
+          <%= link_to 'Show Item', item_path(item), class:"btn btn-secondary inline-block mr-2" %>
+          <% unless user_signed_in? && current_user.admin? %>
+            <%= button_to "Add to cart", add_quantity_carts_cart_items_path(item_id: item.id), class:"btn btn-dark inline-block" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

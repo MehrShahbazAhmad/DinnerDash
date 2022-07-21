@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Restaurants</h1>
+  <table class="table text-center">
+    <thead class="thead-dark">
+      <tr>
+        <th>Title</th>
+        <th>Show</th>
+        <% if current_user.admin? %>
+          <th>No of Items</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @restaurants%>
+    </tbody>
+  </table>
+
+  <%= link_to 'Back', root_path, class:"btn btn-dark"%>
+  <% if current_user.admin? %>
+    <%= link_to 'New Restaurant', new_restaurant_path, class:"btn btn-dark"%>
+  <% end %>
+</div>
