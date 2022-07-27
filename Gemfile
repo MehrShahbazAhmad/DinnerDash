@@ -38,6 +38,7 @@ gem 'cloudinary'
 
 gem 'annotate'
 gem 'pundit'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'rubocop'
