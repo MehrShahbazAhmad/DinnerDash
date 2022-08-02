@@ -34,4 +34,15 @@ Rails.application.routes.draw do
   end
 
   root 'items#index'
+
+  # api
+
+  namespace :api do
+    namespace :v1 do
+      resources :items, only: %i[index show]
+      resources :restaurants, only: %i[index]
+      resources :categories, only: %i[index]
+      resources :orders, only: %i[index]
+    end
+  end
 end
