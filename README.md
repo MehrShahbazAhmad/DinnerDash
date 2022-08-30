@@ -51,6 +51,8 @@ Run DB Build
 ```
 rails db:create
 ```
+rails db:migrate
+```
 Run Server
 ```
 rails s
