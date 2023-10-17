@@ -36,8 +36,10 @@ gem 'jquery-rails'
 gem 'activestorage-cloudinary-service'
 gem 'cloudinary'
 
+gem 'active_model_serializers'
 gem 'annotate'
 gem 'pundit'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'rubocop'
